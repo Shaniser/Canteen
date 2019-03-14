@@ -15,7 +15,7 @@ class Food {
     int calories; //В каллориях
 }
 
-class Canteen {
+class Menu {
     private ArrayList<Food> menu; //Список всех продуктов для этой столовой
     private HashMap<Integer, ArrayList<Food>> typeToListFood; //Списки продуктов по категориям type
 }
