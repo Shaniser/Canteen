@@ -24,7 +24,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/headerSample"
+        android:text="@string/header_sample"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="20sp"
