@@ -24,6 +24,7 @@ class Canteen {
 class Basket {
     private HashMap<Integer, Integer> idToCount; //Количество продуктов по ID <ID, количество>
 }
+
 ```
 ## Необходимо:
 
