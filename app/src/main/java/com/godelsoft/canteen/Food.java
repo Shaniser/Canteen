@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Food {
-    public static int SOUP = 0, SALAD = 1, PORRIDGE = 2,  MEAT = 3, FISH = 4, DESSERT = 5, DRINK = 6;
-    public static String[] TYPES = { "Супы", "Салаты", "Каши", "Мясо", "Рыба", "Напитки", "Дессерты" };
+    public static String[] TYPES = { "Закуски", "Первое", "Второе", "Гарнир", "Хлебобулочные изделия", "Десерты", "Напитки" };
     public static HashMap<Integer, Food> all = new HashMap<>();
 
     private String label;

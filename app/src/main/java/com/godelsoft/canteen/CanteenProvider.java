@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
  * Класс, описывающий столовую
  */
 public class CanteenProvider {
+    private String name;
     private TimeSpan[] workTime, breakTime; //Первый элемент - воскресение!!!
     private Menu[] menus;
 
@@ -19,6 +20,7 @@ public class CanteenProvider {
         this.breakTime = new TimeSpan[7];
         this.menus = new Menu[7];
         //TODO parser
+
     }
 
     /**
@@ -61,6 +63,12 @@ public class CanteenProvider {
      * @return Время перерыва или null если работает без перерыва
      */
     public TimeSpan getBreakTime() { return getBreakTime(new GregorianCalendar()); }
+
+    /**
+     * Получение названия столовой
+     * @return Название
+     */
+    public String getName() { return this.name; }
 
 
     public String toString() {
