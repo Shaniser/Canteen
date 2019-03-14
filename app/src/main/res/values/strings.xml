@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Canteen</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="icon">Icon</string>
+    <string name="label_string_sample">Куриные крылышки в панировке</string>
+    <string name="weight_sample">150г</string>
+    <string name="cost_sample">145,50р</string>
+    <string name="header_sample">Салаты</string>
+    <string name="description_sample">Категория: Супы\nМасса нетто: 155г\nКалорийность: 300ккал\nЦена: 199р</string>
+</resources>
