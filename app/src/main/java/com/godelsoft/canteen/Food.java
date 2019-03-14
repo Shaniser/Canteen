@@ -1,6 +1,7 @@
 package com.godelsoft.canteen;
 
 import android.content.Context;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 public class Food {
     public static int SOUP = 0, SALAD = 1, PORRIDGE = 2,  MEAT = 3, FISH = 4, DESSERT = 5, DRINK = 6;
     public static String[] TYPES = { "Супы", "Салаты", "Каши", "Мясо", "Рыба", "Напитки", "Дессерты" };
-    public static HashMap<Integer, Food> all = new HashMap<>(); //Полный список еды <ID, Food>
+    public static SparseArray<Food> all = new SparseArray<>(); //Полный список еды <ID, Food>
 
     private String label;
     private int id;
