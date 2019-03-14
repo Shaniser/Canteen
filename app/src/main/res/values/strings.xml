@@ -9,4 +9,9 @@
     <string name="cost_sample">145,50р</string>
     <string name="header_sample">Салаты</string>
     <string name="description_sample">Категория: Супы\nМасса нетто: 155г\nКалорийность: 300ккал\nЦена: 199р</string>
+    <string name="fats">Жиры</string>
+    <string name="proteins">Белки</string>
+    <string name="carbohydrates">Углеводы</string>
+    <string name="gramm_sample">28г</string>
+    <string name="nutritional_value">Пищевая ценность на 100г</string>
 </resources>
