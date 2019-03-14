@@ -8,7 +8,7 @@
     <string name="weight_sample">150г</string>
     <string name="cost_sample">145,50р</string>
     <string name="header_sample">Салаты</string>
-    <string name="description_sample">Категория: Супы\nМасса нетто: 155г\nКалорийность: 300ккал\nЦена: 199р</string>
+    <string name="description_sample">Категория: Супы\nВес: 155г\nКалорийность: 300ккал\nЦена: 199р</string>
     <string name="fats">Жиры</string>
     <string name="proteins">Белки</string>
     <string name="carbohydrates">Углеводы</string>

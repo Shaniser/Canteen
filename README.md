@@ -2,31 +2,34 @@
 
 ## Текущая структура проекта
 ```java
-//TODO Леша, отредактируй
 class Food {
     int id;
     int type;
     String label;
-    int weight;
-    double proteins;
-    double fats;
-    double carbohydrates;
-    boolean vagan;
-    int cost;
-    int ccal;
+    int weight; //В граммах
+    double proteins; //От 0 до 1
+    double fats; //От 0 до 1
+    double carbohydrates; //От 0 до 1
+    boolean vegetarian;
+    int cost; //В копейках
+    int calories; //В каллориях
 }
 
-class canteen {
+class Canteen {
+    private ArrayList<Food> menu; //Список всех продуктов для этой столовой
+    private HashMap<Integer, ArrayList<Food>> typeToListFood; //Списки продуктов по категориям type
 }
+
 class Basket {
+    private HashMap<Integer, Integer> idToCount; //Количество продуктов по ID <ID, количество>
 }
 ```
 ## Необходимо:
 
-*Проект должен находится в папке `project`
-*Используем camelCase, пишем в том же стиле, что уже начал Леша
-*Исправить структуру пректа
-*Распределить задачи
+*Проект должен находится в папке `project`\
+*Используем camelCase, пишем в том же стиле, что уже начал Леша\
+*Исправить структуру пректа\
+*Распределить задачи\
 *Все вспомогательные файлы держать отдельно от `project` в соответствующей директории
 
 ### Настройка git
