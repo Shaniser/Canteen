@@ -7,16 +7,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class Canteen {
-    private ArrayList<Food> menu = new ArrayList<>();
-    private HashMap<Integer, ArrayList<Food>> typeToListFood = new HashMap<>();
+/**
+ * Класс, описывающий содержимое меню столовой
+ */
 
-    public Canteen(int[] ids){
+public class Menu {
+    private ArrayList<Food> menu = new ArrayList<>(); //Список всех продуктов в меню для этой столовой
+    private HashMap<Integer, ArrayList<Food>> typeToListFood = new HashMap<>(); //Списки продуктов по категориям type
+
+    /**
+     * Конструктор, из массива id заполняет menu и typeToListFood
+     * @param ids
+     */
+
+    public Menu(int[] ids){
         for(int id : ids){
             Food food = Food.all.get(id);
             menu.add(food);
@@ -27,8 +35,13 @@ public class Canteen {
         }
     }
 
-    public Canteen(ArrayList<Food> ids){
-        for(Food food : ids){
+    /**
+     * Конструктор, из массива id заполняет menu и typeToListFood
+     * @param foods
+     */
+
+    public Menu(ArrayList<Food> foods){
+        for(Food food : foods){
             menu.add(food);
             if(!typeToListFood.containsKey(food.getType())){
                 typeToListFood.put(food.getType(), new ArrayList<Food>());
@@ -36,6 +49,13 @@ public class Canteen {
             typeToListFood.get(food.getType()).add(food);
         }
     }
+
+    /**
+     * Выводит на экран все отсортированное меню, включая заголовки
+     * @param ll - LinearLayout куда выводим
+     * @param context
+     * @param comparator - Критерий сортировки
+     */
 
     public void toScreen(LinearLayout ll, Context context, Comparator<Food> comparator){
         for (int i = 0; i < Food.TYPES.length; i++){
