@@ -16,9 +16,13 @@ class Food {
     int calories; //В каллориях
 }
 
-class canteen {
+class Canteen {
+    private ArrayList<Food> menu; //Список всех продуктов для этой столовой
+    private HashMap<Integer, ArrayList<Food>> typeToListFood; //Списки продуктов по категориям type
 }
+
 class Basket {
+    private HashMap<Integer, Integer> idToCount; //Количество продуктов по ID <ID, количество>
 }
 ```
 ## Необходимо:
