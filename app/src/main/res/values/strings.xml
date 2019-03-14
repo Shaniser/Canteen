@@ -14,4 +14,7 @@
     <string name="carbohydrates">Углеводы</string>
     <string name="gramm_sample">28г</string>
     <string name="nutritional_value">Пищевая ценность на 100г</string>
+    <string name="count_sample">1</string>
+    <string name="total_header">Всего:</string>
+    <string name="calories_sample">300ккал</string>
 </resources>

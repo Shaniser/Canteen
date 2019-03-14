@@ -8,7 +8,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 /**
- * Класс еды
+ * Класс блюда
  */
 
 public class Food {
