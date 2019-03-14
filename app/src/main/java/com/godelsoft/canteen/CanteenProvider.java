@@ -2,14 +2,13 @@ package com.godelsoft.canteen;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Класс, описывающий столовую
  */
 public class CanteenProvider {
     private TimeSpan[] workTime, breakTime; //Первый элемент - воскресение!!!
+    private Menu[] menus;
 
     /**
      * Создание нового объекта
@@ -18,24 +17,24 @@ public class CanteenProvider {
     public CanteenProvider(String data) {
         this.workTime = new TimeSpan[7]; //По умолчанию все дни - выходные
         this.breakTime = new TimeSpan[7];
-        //TODO
+        this.menus = new Menu[7];
+        //TODO parser
     }
 
     /**
-     * Получение списка блюд, продаваемых в столовой в заданный день
+     * Получение сменю на заданный день
      * @param day День
      * @return Список блюд
      */
-    public List<Food> getFoodList(GregorianCalendar day) {
-        //TODO
-        return null;
+    public Menu getFoodList(GregorianCalendar day) {
+        return menus[day.get(Calendar.DAY_OF_WEEK) - 1];
     }
 
     /**
-     * Получение списка блюд, продаваемых в столовой в текущий день
+     * Получение меню на текущий день
      * @return Список блюд
      */
-    public List<Food> getFoodList() {
+    public Menu getFoodList() {
         return getFoodList(new GregorianCalendar());
     }
 
