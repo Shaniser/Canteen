@@ -75,15 +75,6 @@ public class Food {
         return view;
     }
 
-    public int getId() {
-        return id;
-    }
-
-
-    public int getType() {
-        return type;
-    }
-
     /**
      * Возвращает строку, представляющую объект в виде, подходящем для парсинга в CanteenProvider
      * @return Строковое представление блюда
@@ -95,6 +86,14 @@ public class Food {
                 this.calories, this.vegetarian ? '+' : '-', this.cost);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
     public String getLabel() {
         return label;
     }
@@ -103,7 +102,7 @@ public class Food {
         return weight;
     }
 
-    public double getCalories() {
+    public int getCalories() {
         return calories;
     }
 
