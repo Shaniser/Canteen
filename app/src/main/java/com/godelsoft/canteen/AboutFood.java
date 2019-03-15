@@ -39,6 +39,8 @@ public class AboutFood extends AppCompatActivity {
         TextListener countInBasket = new TextListener((TextView) findViewById(R.id.count), food.getId());
         countInBasket.setText("" + Basket.getCount(food.getId()));
 
+        //TODO Установить соответствующую блюду картинку
+
         /**
          * Основное описание
          */

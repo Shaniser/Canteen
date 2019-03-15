@@ -23,6 +23,7 @@
             android:layout_height="0dp"
             android:contentDescription="@string/icon"
             android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +37,7 @@
             android:text="@string/label_string_sample"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:typeface="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,25 +49,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/weight_sample"
             android:textColor="?android:attr/textColorSecondary"
             android:textStyle="bold"
             android:typeface="normal"
-            app:layout_constraintStart_toStartOf="@+id/label"
-            app:layout_constraintTop_toBottomOf="@+id/label" />
+            app:layout_constraintBottom_toBottomOf="@+id/cost"
+            app:layout_constraintStart_toEndOf="@+id/cost"
+            app:layout_constraintTop_toBottomOf="@+id/label"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/cost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/cost_sample"
             android:textColor="?android:attr/textColorSecondary"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:typeface="normal"
-            app:layout_constraintStart_toEndOf="@+id/weigth"
+            app:layout_constraintBottom_toBottomOf="@+id/foodTypeIcon"
+            app:layout_constraintStart_toEndOf="@+id/foodTypeIcon"
             app:layout_constraintTop_toBottomOf="@+id/label" />
 
         <android.support.constraint.ConstraintLayout
@@ -83,7 +88,6 @@
                 android:id="@+id/minus"
                 android:layout_width="24dp"
                 android:layout_height="0dp"
-                android:layout_marginEnd="8dp"
                 android:background="@drawable/little_minus"
                 app:layout_constraintDimensionRatio="h,1:1"
                 app:layout_constraintEnd_toStartOf="@+id/count"
@@ -101,9 +105,8 @@
 
             <TextView
                 android:id="@+id/count"
-                android:layout_width="24dp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:text="@string/count_sample"
                 android:textAlignment="center"
                 android:textSize="18sp"

@@ -1,6 +1,7 @@
 package com.godelsoft.canteen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -53,7 +54,7 @@ public class Food {
      * @param context Контекст
      * @return cardView
      */
-    public View toCard(Context context){
+    public View toCard(final Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.food_card, null);
         ImageView mIcon = view.findViewById(R.id.foodTypeIcon);
         TextView mLabel = view.findViewById(R.id.label);
@@ -62,25 +63,34 @@ public class Food {
         //TODO Установить соответствующую блюду картинку
 
         mLabel.setText(label);
-        mWeigth.setText(weight);
-        mCost.setText(cost);
+        mWeigth.setText("" + weight + context.getResources().getString(R.string.gram));
+        mCost.setText("" + (cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + context.getResources().getString(R.string.rub));
 
         Button minus = view.findViewById(R.id.minus);
         Button plus = view.findViewById(R.id.plus);
-        TextView countInBasket = view.findViewById(R.id.count);
+        TextListener countInBasket = new TextListener((TextView) view.findViewById(R.id.count), id);
+        countInBasket.setText("" + Basket.getCount(id));
 
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Basket.remove(id, 1);
-                //TODO View parent = view.;
+            }
+        });
+
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Basket.add(id, 1);
             }
         });
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Переход в подробную карточку
+                Intent intent = new Intent(context, AboutFood.class);
+                intent.putExtra("id", id);
+                context.startActivity(intent);
             }
         });
 

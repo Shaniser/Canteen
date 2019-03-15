@@ -78,12 +78,14 @@ public class Menu {
      * @param comparator - Критерий сортировки
      */
     public void toScreen(LinearLayout ll, Context context, Comparator<Food> comparator){
+        ll.removeAllViews();
         for (int i = 0; i < Food.TYPES.length; i++){
             if(typeToListFood.containsKey(i)){
+
                 View header = LayoutInflater.from(context).inflate(R.layout.header, null);
                 TextView h = header.findViewById(R.id.header);
                 h.setText(Food.TYPES[i]);
-                ll.addView(h);
+                ll.addView(header);
 
                 Collections.sort(typeToListFood.get(i), comparator);
                 for(Food food : typeToListFood.get(i)){
