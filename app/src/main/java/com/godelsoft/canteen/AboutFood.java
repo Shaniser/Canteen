@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
 
 public class AboutFood extends AppCompatActivity {
@@ -35,7 +37,7 @@ public class AboutFood extends AppCompatActivity {
 
         minus = findViewById(R.id.minus);
         plus = findViewById(R.id.plus);
-        countInBasket = findViewById(R.id.count);
+        TextListener countInBasket = new TextListener((TextView) findViewById(R.id.count), food.getId());
         countInBasket.setText("" + Basket.getCount(food.getId()));
 
         /**
@@ -69,11 +71,13 @@ public class AboutFood extends AppCompatActivity {
         progressBarCarbohydrates.setProgress((int)(food.getCarbohydrates() * 100));
         carbohydratesP.setText((int)(food.getCarbohydrates() * 100) + "%");
 
+        countTotalCost();
+
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Basket.remove(food, 1);
-                countInBasket.setText("" + Basket.getCount(food.getId()));
+                countTotalCost();
             }
         });
 
@@ -81,7 +85,7 @@ public class AboutFood extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Basket.add(food, 1);
-                countInBasket.setText("" + Basket.getCount(food.getId()));
+                countTotalCost();
             }
         });
     }
@@ -95,5 +99,16 @@ public class AboutFood extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void countTotalCost(){
+        int count = Basket.getCount(food.getId());
+        int cost = food.getCost() * count;
+        double calories = food.getCalories() * count;
+        TextView totalCalories = findViewById(R.id.totalCalories);
+        TextView totalCost = findViewById(R.id.totalCost);
+
+        totalCost.setText((cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + getResources().getString(R.string.rub));
+        totalCalories.setText(calories / 1000 + getResources().getString(R.string.ccal));
     }
 }
