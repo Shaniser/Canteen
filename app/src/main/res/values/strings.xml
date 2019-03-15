@@ -8,8 +8,10 @@
     <string name="weight_sample">150г</string>
     <string name="cost_sample">145,50р</string>
     <string name="header_sample">Салаты</string>
-    <string name="description_sample">Категория: Супы\nВес: 155г\nКалорийность: 300ккал\nЦена: 199р</string>
-    <string name="description_basket_sample">Количество: 4\nВес: 357г\nКалорийность: 500ккал\nЦена: 282,50р</string>
+    <string name="description_sample">Категория:\nВес:\nКалорийность:\nЦена:</string>
+    <string name="description_properties_sample">Супы\n155г\n320ккал\n160р</string>
+    <string name="description_basket_sample">Количество:\nВес:\nКалорийность:\nЦена:</string>
+    <string name="description_basket_properties_sample">4\n250г\n332ккал\n155,50р</string>
     <string name="nutritional_value">Макроэлементы</string>
     <string name="fats">Жиры</string>
     <string name="proteins">Белки</string>
@@ -28,4 +30,6 @@
     <string name="ccal">ккал</string>
     <string name="basket">Корзина</string>
     <string name="count">Количество: </string>
+    <string name="canteens">Столовые</string>
+    <string name="empty_basket">Корзина пока пуста</string>
 </resources>

@@ -17,14 +17,14 @@ public class TextListener {
          listeners.get(listenId).add(this);
     }
 
-    public static void change(int listenId, String text){
+    public static void change(int listenId, int count){
         ArrayList<TextListener> listeners = TextListener.listeners.get(listenId);
         for(TextListener listener : listeners){
-            listener.setText(text);
+            listener.set(count);
         }
     }
 
-    public void setText(String text){
-        textView.setText(text);
+    public void set(int count){
+        textView.setText("" + count);
     }
 }
