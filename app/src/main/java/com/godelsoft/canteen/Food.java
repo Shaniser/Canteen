@@ -1,18 +1,20 @@
 package com.godelsoft.canteen;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.HashMap;
+
+/**
+ * Класс блюда
+ */
 
 public class Food {
     public static String[] TYPES = { "Закуски", "Первое", "Второе", "Гарнир", "Хлебобулочные изделия", "Десерты", "Напитки" };
-    public static HashMap<Integer, Food> all = new HashMap<>();
+    public static SparseArray<Food> all = new SparseArray<>(); //Полный список еды <ID, Food>
 
     private String label;
     private int id;
@@ -35,13 +37,19 @@ public class Food {
         all.put(id, this);
     }
 
-    public int getId() {
-        return id;
-    }
-
+    /**
+     * Изменение стоимости
+     * @param newCost
+     */
     public void setCost(int newCost){
         this.cost = newCost;
     }
+
+    /**
+     * Создаёт карточку из объекта Food
+     * @param context
+     * @return cardView
+     */
 
     public View toCard(Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.food_card, null);
@@ -49,6 +57,7 @@ public class Food {
         TextView mLabel = view.findViewById(R.id.label);
         TextView mWeigth = view.findViewById(R.id.weigth);
         TextView mCost = view.findViewById(R.id.cost);
+        //TODO Установить соответствующую блюду картинку
 
         mLabel.setText(label);
         mWeigth.setText(weight);
@@ -58,11 +67,15 @@ public class Food {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //TODO Переход в подробную карточку
             }
         });
 
         return view;
+    }
+
+    public int getId() {
+        return id;
     }
 
 
