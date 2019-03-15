@@ -12,10 +12,17 @@
     <string name="fats">Жиры</string>
     <string name="proteins">Белки</string>
     <string name="carbohydrates">Углеводы</string>
-    <string name="gramm_sample">28г</string>
-    <string name="nutritional_value">Пищевая ценность на 100г</string>
+    <string name="procent_sample">28%</string>
+    <string name="nutritional_value">Макроэлементы</string>
     <string name="count_sample">1</string>
     <string name="total_header">Всего:</string>
     <string name="calories_sample">300ккал</string>
     <string name="about_food_title">О блюде</string>
+    <string name="category">Категория: </string>
+    <string name="weight">Вес: </string>
+    <string name="calories">Калорийность: </string>
+    <string name="cost">Цена: </string>
+    <string name="gram">г</string>
+    <string name="rub">р</string>
+    <string name="ccal">ккал</string>
 </resources>
