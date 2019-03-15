@@ -35,8 +35,10 @@ public final class Basket {
     public static void remove(int id, int count){
         if(idToCount.containsKey(id) && idToCount.get(id) > 0) {
             idToCount.put(id, Math.max(idToCount.get(id) - count, 0));
+            TextListener.change(id, "" + idToCount.get(id));
+        }else{
+            TextListener.change(id, "0");
         }
-        TextListener.change(id, "" + idToCount.get(id));
     }
 
     public static void remove(Food food, int count){
