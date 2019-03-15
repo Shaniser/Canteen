@@ -83,4 +83,32 @@ public class Food {
     public int getType() {
         return type;
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public int getWeight(){
+        return weight;
+    }
+
+    public double getCalories() {
+        return calories;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public double getProteins() {
+        return proteins;
+    }
+
+    public double getFats() {
+        return fats;
+    }
+
+    public double getCarbohydrates() {
+        return carbohydrates;
+    }
 }
