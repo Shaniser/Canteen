@@ -21,7 +21,7 @@ public final class Basket {
         }else{
             idToCount.put(id, count);
         }
-        TextListener.change(id, "" + idToCount.get(id));
+        TextListener.change(id, idToCount.get(id));
         BasketActivity.countDescription();
     }
 
@@ -38,9 +38,9 @@ public final class Basket {
     public static void remove(int id, int count){
         if(idToCount.containsKey(id) && idToCount.get(id) > 0) {
             idToCount.put(id, Math.max(idToCount.get(id) - count, 0));
-            TextListener.change(id, "" + idToCount.get(id));
+            TextListener.change(id, idToCount.get(id));
         }else{
-            TextListener.change(id, "0");
+            TextListener.change(id, 0);
         }
         BasketActivity.countDescription();
     }

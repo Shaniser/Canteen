@@ -72,7 +72,7 @@ public class Food {
         Button minus = view.findViewById(R.id.minus);
         Button plus = view.findViewById(R.id.plus);
         TextListener countInBasket = new TextListener((TextView) view.findViewById(R.id.count), id);
-        countInBasket.setText("" + Basket.getCount(id));
+        countInBasket.set(Basket.getCount(id));
 
         minus.setOnClickListener(new View.OnClickListener() {
             @Override

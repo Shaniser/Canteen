@@ -35,7 +35,7 @@ public class AboutFood extends AppCompatActivity {
         minus = findViewById(R.id.minus);
         plus = findViewById(R.id.plus);
         TextListener countInBasket = new TextListener((TextView) findViewById(R.id.count), food.getId());
-        countInBasket.setText("" + Basket.getCount(food.getId()));
+        countInBasket.set(Basket.getCount(food.getId()));
 
         //TODO Установить соответствующую блюду картинку
 
@@ -66,13 +66,30 @@ public class AboutFood extends AppCompatActivity {
         progressBarCarbohydrates.setProgress((int)(food.getCarbohydrates() * 100));
         carbohydratesP.setText(((double)(int)(food.getCarbohydrates() * 10000) / 100) + "%");
 
-        countTotalCost();
+        TextListener totalCost = new TextListener((TextView) findViewById(R.id.totalCost), food.getId()){
+            @Override
+            public void set(int count){
+                int cost = food.getCost() * count;
+                textView.setText((cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + getResources().getString(R.string.rub));
+            }
+        };
+
+        totalCost.set(Basket.getCount(food.getId()));
+
+        TextListener totalCalories = new TextListener((TextView) findViewById(R.id.totalCalories), food.getId()){
+            @Override
+            public void set(int count){
+                double calories = food.getCalories() * count;
+                textView.setText(calories + getResources().getString(R.string.ccal));
+            }
+        };
+
+        totalCalories.set(Basket.getCount(food.getId()));
 
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Basket.remove(food, 1);
-                countTotalCost();
             }
         });
 
@@ -80,7 +97,6 @@ public class AboutFood extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Basket.add(food, 1);
-                countTotalCost();
             }
         });
     }
@@ -104,16 +120,5 @@ public class AboutFood extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void countTotalCost(){
-        int count = Basket.getCount(food.getId());
-        int cost = food.getCost() * count;
-        double calories = food.getCalories() * count;
-        TextView totalCalories = findViewById(R.id.totalCalories);
-        TextView totalCost = findViewById(R.id.totalCost);
-
-        totalCost.setText((cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + getResources().getString(R.string.rub));
-        totalCalories.setText(calories + getResources().getString(R.string.ccal));
     }
 }
