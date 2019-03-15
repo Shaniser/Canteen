@@ -1,6 +1,8 @@
 package com.godelsoft.canteen;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Класс, описывающий корзину
@@ -53,5 +55,9 @@ public final class Basket {
     public static int getCount(int id){
         if(!idToCount.containsKey(id)) return 0;
         return idToCount.get(id);
+    }
+
+    public static Set<Integer> getIdSet(){
+        return idToCount.keySet();
     }
 }
