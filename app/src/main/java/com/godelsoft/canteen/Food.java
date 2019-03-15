@@ -22,7 +22,7 @@ public class Food {
 
     private String label;
     private int id;
-    private double proteins, fats, carbohydrates;
+    private double proteins, fats, carbohydrates, gramProteins, gramFats, gramCarbohydrates;
     private boolean vegetarian;
     private int type, weight, calories, cost;
 
@@ -31,6 +31,9 @@ public class Food {
         this.type = type;
         this.label = label;
         this.weight = weight;
+        this.gramProteins = proteins;
+        this.gramFats = fats;
+        this.gramCarbohydrates = carbohydrates;
         this.proteins = proteins / (proteins + fats + carbohydrates);
         this.fats = fats / (proteins + fats + carbohydrates);
         this.carbohydrates = carbohydrates / (proteins + fats + carbohydrates);
@@ -142,5 +145,17 @@ public class Food {
 
     public double getCarbohydrates() {
         return carbohydrates;
+    }
+
+    public double getGramCarbohydrates() {
+        return gramCarbohydrates;
+    }
+
+    public double getGramFats() {
+        return gramFats;
+    }
+
+    public double getGramProteins() {
+        return gramProteins;
     }
 }

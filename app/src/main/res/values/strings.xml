@@ -9,11 +9,12 @@
     <string name="cost_sample">145,50р</string>
     <string name="header_sample">Салаты</string>
     <string name="description_sample">Категория: Супы\nВес: 155г\nКалорийность: 300ккал\nЦена: 199р</string>
+    <string name="description_basket_sample">Количество: 4\nВес: 357г\nКалорийность: 500ккал\nЦена: 282,50р</string>
+    <string name="nutritional_value">Макроэлементы</string>
     <string name="fats">Жиры</string>
     <string name="proteins">Белки</string>
     <string name="carbohydrates">Углеводы</string>
     <string name="procent_sample">28%</string>
-    <string name="nutritional_value">Макроэлементы</string>
     <string name="count_sample">1</string>
     <string name="total_header">Всего:</string>
     <string name="calories_sample">300ккал</string>
@@ -25,4 +26,6 @@
     <string name="gram">г</string>
     <string name="rub">р</string>
     <string name="ccal">ккал</string>
+    <string name="basket">Корзина</string>
+    <string name="count">Количество: </string>
 </resources>
