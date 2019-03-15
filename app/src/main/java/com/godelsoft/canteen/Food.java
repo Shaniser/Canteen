@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.HashMap;
@@ -64,6 +65,17 @@ public class Food {
         mWeigth.setText(weight);
         mCost.setText(cost);
 
+        Button minus = view.findViewById(R.id.minus);
+        Button plus = view.findViewById(R.id.plus);
+        TextView countInBasket = view.findViewById(R.id.count);
+
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Basket.remove(id, 1);
+                //TODO View parent = view.;
+            }
+        });
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

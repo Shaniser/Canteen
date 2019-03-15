@@ -38,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mTextMessage = (TextView) findViewById(R.id.message);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Food testFood = new Food(1,3, "Гречка", 120, 0.25, 0.27, 0.29, 200000, true, 10050);
+        Food testFood = new Food(1,3, "Гречка", 120, 0.55, 0.27, 0.29, 200000, true, 10050);
 
         Intent intent = new Intent(this, AboutFood.class);
         intent.putExtra("id", testFood.getId());
