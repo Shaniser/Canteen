@@ -1,6 +1,6 @@
 package com.godelsoft.canteen;
 
-public enum FoodType {
+public enum FoodType { //TODO Use it instead numbers
     Snack, //Закуски (+Салаты)
     Soup, //Первые блюда
     Hot, //Вторые блюда

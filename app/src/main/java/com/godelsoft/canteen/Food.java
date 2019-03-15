@@ -1,12 +1,14 @@
 package com.godelsoft.canteen;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Класс блюда
@@ -18,9 +20,9 @@ public class Food {
 
     private String label;
     private int id;
-    private double proteins, fats, carbohydrates, calories;
+    private double proteins, fats, carbohydrates;
     private boolean vegetarian;
-    private int type, weight, cost;
+    private int type, weight, calories, cost;
 
     public Food(int id, int type, String label, int weight, double proteins, double fats, double carbohydrates, int calories, boolean vegetarian, int costInKopecks){
         this.id = id;
@@ -39,7 +41,7 @@ public class Food {
 
     /**
      * Изменение стоимости
-     * @param newCost
+     * @param newCost Новая стоимость
      */
     public void setCost(int newCost){
         this.cost = newCost;
@@ -47,10 +49,9 @@ public class Food {
 
     /**
      * Создаёт карточку из объекта Food
-     * @param context
+     * @param context Контекст
      * @return cardView
      */
-
     public View toCard(Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.food_card, null);
         ImageView mIcon = view.findViewById(R.id.foodTypeIcon);
@@ -81,5 +82,16 @@ public class Food {
 
     public int getType() {
         return type;
+    }
+
+    /**
+     * Возвращает строку, представляющую объект в виде, подходящем для парсинга в CanteenProvider
+     * @return Строковое представление блюда
+     */
+    @NonNull
+    public String toString() {
+        return String.format(Locale.US, "%d:%d:%s:%d:%f:%f:%f:%d:%c:%d",
+                this.id, this.type, this.label, this.weight, this.proteins, this.fats, this.carbohydrates,
+                this.calories, this.vegetarian ? '+' : '-', this.cost);
     }
 }

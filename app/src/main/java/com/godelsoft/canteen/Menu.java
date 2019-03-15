@@ -14,16 +14,14 @@ import java.util.HashMap;
 /**
  * Класс, описывающий содержимое меню столовой
  */
-
 public class Menu {
     private ArrayList<Food> menu = new ArrayList<>(); //Список всех продуктов в меню для этой столовой
     private HashMap<Integer, ArrayList<Food>> typeToListFood = new HashMap<>(); //Списки продуктов по категориям type
 
     /**
      * Конструктор, из массива id заполняет menu и typeToListFood
-     * @param ids
+     * @param ids Массив id
      */
-
     public Menu(int[] ids){
         for(int id : ids){
             Food food = Food.all.get(id);
@@ -36,10 +34,9 @@ public class Menu {
     }
 
     /**
-     * Конструктор, из массива id заполняет menu и typeToListFood
-     * @param foods
+     * Конструктор, из массива блюд заполняет menu и typeToListFood
+     * @param foods Массив блюд
      */
-
     public Menu(ArrayList<Food> foods){
         for(Food food : foods){
             menu.add(food);
@@ -51,12 +48,35 @@ public class Menu {
     }
 
     /**
+     * Конструктор по умолчанию
+     */
+    public Menu() {
+    }
+
+    /**
+     * Добавления блюда в меню
+     * @param food Добавляемое блюдо
+     */
+    public void add(Food food) {
+        menu.add(food);
+        if(!typeToListFood.containsKey(food.getType())){
+            typeToListFood.put(food.getType(), new ArrayList<Food>());
+        }
+        typeToListFood.get(food.getType()).add(food);
+    }
+
+    /**
+     * Получение списка всех блюд
+     * @return Список блюд
+     */
+    public ArrayList<Food> getList() { return this.menu; }
+
+    /**
      * Выводит на экран все отсортированное меню, включая заголовки
      * @param ll - LinearLayout куда выводим
-     * @param context
+     * @param context Контекст
      * @param comparator - Критерий сортировки
      */
-
     public void toScreen(LinearLayout ll, Context context, Comparator<Food> comparator){
         for (int i = 0; i < Food.TYPES.length; i++){
             if(typeToListFood.containsKey(i)){
