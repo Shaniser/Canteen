@@ -32,6 +32,40 @@ class Basket {
 *Распределить задачи\
 *Все вспомогательные файлы держать отдельно от `project` в соответствующей директории
 
+## Вспомогательные структуры:
+``` java
+public enum FoodType {
+    Snack, //Закуски (+Салаты)
+    Soup, //Первые блюда
+    Hot, //Вторые блюда
+    Garnish, //Гарниры
+    Bakery, //Хлебобулочные изделия
+    Desert, //Пустыня
+    Drink, //Напитки
+}
+
+public class TextListener {
+    public TextView textView;
+
+    public TextListener(TextView textView, int listenId){
+        this.textView = textView;
+        ...
+    }
+
+    public static void change(int listenId, String text){
+        //All listeners with "listenId" change textView.text to text
+    }
+
+    public void setText(String text){
+        textView.setText(text);
+    }
+}
+
+public class TimeSpan {
+    ...
+}
+
+
 ### Настройка git
 
 Скачайте git.
