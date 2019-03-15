@@ -110,11 +110,11 @@
                             app:layout_constraintTop_toBottomOf="@+id/nutritionalValue" />
 
                         <TextView
-                            android:id="@+id/proteinsG"
+                            android:id="@+id/proteinsP"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/gramm_sample"
+                            android:text="@string/procent_sample"
                             android:textColor="@android:color/holo_blue_dark"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/proteinsText"
@@ -149,11 +149,11 @@
                             app:layout_constraintTop_toBottomOf="@+id/proteinsProgressBar" />
 
                         <TextView
-                            android:id="@+id/fatsG"
+                            android:id="@+id/fatsP"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/gramm_sample"
+                            android:text="@string/procent_sample"
                             android:textColor="@android:color/holo_green_dark"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/fatsText"
@@ -204,11 +204,11 @@
                             app:layout_constraintTop_toBottomOf="@+id/carbohydratesText" />
 
                         <TextView
-                            android:id="@+id/carbohydratesG"
+                            android:id="@+id/carbohydratesP"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/gramm_sample"
+                            android:text="@string/procent_sample"
                             android:textColor="@android:color/holo_orange_dark"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/carbohydratesText"

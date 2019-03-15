@@ -94,4 +94,32 @@ public class Food {
                 this.id, this.type, this.label, this.weight, this.proteins, this.fats, this.carbohydrates,
                 this.calories, this.vegetarian ? '+' : '-', this.cost);
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public int getWeight(){
+        return weight;
+    }
+
+    public double getCalories() {
+        return calories;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public double getProteins() {
+        return proteins;
+    }
+
+    public double getFats() {
+        return fats;
+    }
+
+    public double getCarbohydrates() {
+        return carbohydrates;
+    }
 }
