@@ -1,17 +1,15 @@
 package com.godelsoft.canteen;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.util.Arrays;
 
 public class AboutFood extends AppCompatActivity {
     Food food;
@@ -22,7 +20,7 @@ public class AboutFood extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_food);
-        ActionBar actionBar =getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.about_food_title));
@@ -46,13 +44,9 @@ public class AboutFood extends AppCompatActivity {
          */
         description = findViewById(R.id.description);
         StringBuilder builder = new StringBuilder();
-        builder.append(getResources().getString(R.string.category));
         builder.append(" " + Food.TYPES[food.getType()] + "\n");
-        builder.append(getResources().getString(R.string.weight));
         builder.append(" " + food.getWeight() + getResources().getString(R.string.gram) + "\n");
-        builder.append(getResources().getString(R.string.calories));
         builder.append(" " + food.getCalories() + getResources().getString(R.string.ccal) + "\n");
-        builder.append(getResources().getString(R.string.cost));
         builder.append(" " + (food.getCost() / 100) + (((food.getCost() % 100) == 0) ? "" : "." + (food.getCost() % 100)) + getResources().getString(R.string.rub));
         description.setText(builder);
 
@@ -92,10 +86,20 @@ public class AboutFood extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
+                return true;
+            case R.id.basket:
+                Intent intent = new Intent(this, BasketActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
