@@ -30,9 +30,9 @@ public class Food {
         this.type = type;
         this.label = label;
         this.weight = weight;
-        this.proteins = proteins;
-        this.fats = fats;
-        this.carbohydrates = carbohydrates;
+        this.proteins = proteins / (proteins + fats + carbohydrates);
+        this.fats = fats / (proteins + fats + carbohydrates);
+        this.carbohydrates = carbohydrates / (proteins + fats + carbohydrates);
         this.vegetarian = vegetarian;
         this.cost = costInKopecks;
         this.calories = calories;

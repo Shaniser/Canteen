@@ -29,7 +29,6 @@ public class AboutFood extends AppCompatActivity {
 
         label = findViewById(R.id.label);
 
-        //TODO Формирование страницы с блюдом
         int id = getIntent().getExtras().getInt("id");
         food = Food.all.get(id);
 
@@ -50,7 +49,7 @@ public class AboutFood extends AppCompatActivity {
         builder.append(getResources().getString(R.string.weight));
         builder.append(" " + food.getWeight() + getResources().getString(R.string.gram) + "\n");
         builder.append(getResources().getString(R.string.calories));
-        builder.append(" " + food.getCalories() / 1000 + getResources().getString(R.string.ccal) + "\n");
+        builder.append(" " + food.getCalories() + getResources().getString(R.string.ccal) + "\n");
         builder.append(getResources().getString(R.string.cost));
         builder.append(" " + (food.getCost() / 100) + (((food.getCost() % 100) == 0) ? "" : "." + (food.getCost() % 100)) + getResources().getString(R.string.rub));
         description.setText(builder);
@@ -61,15 +60,15 @@ public class AboutFood extends AppCompatActivity {
         TextView proteinsP = findViewById(R.id.proteinsP);
         ProgressBar progressBarProteins = findViewById(R.id.proteinsProgressBar);
         progressBarProteins.setProgress((int)(food.getProteins() * 100));
-        proteinsP.setText((int)(food.getProteins() * 100) + "%");
+        proteinsP.setText(((double)(int)(food.getProteins() * 10000) / 100) + "%");
         TextView fatsP = findViewById(R.id.fatsP);
         ProgressBar progressBarFats = findViewById(R.id.fatsProgressBar);
         progressBarFats.setProgress((int)(food.getFats() * 100));
-        fatsP.setText((int)(food.getFats() * 100) + "%");
+        fatsP.setText(((double)(int)(food.getFats() * 10000) / 100) + "%");
         TextView carbohydratesP = findViewById(R.id.carbohydratesP);
         ProgressBar progressBarCarbohydrates = findViewById(R.id.carbohydratesProgressBar);
         progressBarCarbohydrates.setProgress((int)(food.getCarbohydrates() * 100));
-        carbohydratesP.setText((int)(food.getCarbohydrates() * 100) + "%");
+        carbohydratesP.setText(((double)(int)(food.getCarbohydrates() * 10000) / 100) + "%");
 
         countTotalCost();
 
@@ -109,6 +108,6 @@ public class AboutFood extends AppCompatActivity {
         TextView totalCost = findViewById(R.id.totalCost);
 
         totalCost.setText((cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + getResources().getString(R.string.rub));
-        totalCalories.setText(calories / 1000 + getResources().getString(R.string.ccal));
+        totalCalories.setText(calories + getResources().getString(R.string.ccal));
     }
 }

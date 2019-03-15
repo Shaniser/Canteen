@@ -12,7 +12,7 @@ class Food {
     double carbohydrates; //От 0 до 1
     boolean vegetarian;
     int cost; //В копейках
-    int calories; //В каллориях
+    int calories; //В Килокалориях
 }
 
 class Menu {
