@@ -36,7 +36,7 @@ public class CanteenProvider {
                     this.workTime[i] = new TimeSpan(Integer.parseInt(tarr[0]), Integer.parseInt(tarr[1]), Integer.parseInt(tarr[2]), Integer.parseInt(tarr[3]));
                 }
                 if (arr[i + 10].equals("-"))
-                    this.workTime[i] = null;
+                    this.breakTime[i] = null;
                 else {
                     String[] tarr = arr[i + 2].split(":");
                     this.breakTime[i] = new TimeSpan(Integer.parseInt(tarr[0]), Integer.parseInt(tarr[1]), Integer.parseInt(tarr[2]), Integer.parseInt(tarr[3]));
@@ -63,9 +63,11 @@ public class CanteenProvider {
                 }
             }
         } catch (Exception e) {
-            //TODO Menu failed to load
+            //TODO
+            throw new RuntimeException("Menu failed to load");
         }
     }
+
 
     /**
      * Получение меню на заданный день
@@ -84,6 +86,31 @@ public class CanteenProvider {
         return getFoodList(new GregorianCalendar());
     }
 
+
+    /**
+     * Сообщает, работает ли столовая в заданный день в заданное время
+     * @param day Момент времени
+     * @return true - если столовая работает, false - иначе
+     */
+    public boolean isWorking(GregorianCalendar day) {
+        if (this.workTime[day.get(Calendar.DAY_OF_WEEK) - 1] == null)
+            return false;
+        if (this.breakTime[day.get(Calendar.DAY_OF_WEEK) - 1] == null)
+            return this.workTime[day.get(Calendar.DAY_OF_WEEK) - 1].isInInterval(day);
+        else
+            return this.workTime[day.get(Calendar.DAY_OF_WEEK) - 1].isInInterval(day) &&
+                !this.breakTime[day.get(Calendar.DAY_OF_WEEK) - 1].isInInterval(day);
+    }
+
+    /**
+     * Сообщает, работает ли столовая сейчас
+     * @return true - если столовая работает, false - иначе
+     */
+    public boolean isWorking() {
+        return isWorking(new GregorianCalendar());
+    }
+
+
     /**
      * Получение времени работы столовой (без перерыва)
      * @param day Заданный день
@@ -96,6 +123,7 @@ public class CanteenProvider {
      * @return Время перерыва или null если работает без перерыва
      */
     public TimeSpan getBreakTime(GregorianCalendar day) { return this.breakTime[day.get(Calendar.DAY_OF_WEEK) - 1]; }
+
 
     /**
      * Получение времени работы столовой (без перерыва) в текущий день
@@ -113,6 +141,7 @@ public class CanteenProvider {
      * @return Название
      */
     public String getName() { return this.name; }
+
 
     /**
      * Возвращает строку, пригодную для создания нового объекта CanteenProvider
