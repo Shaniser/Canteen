@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
  * Класс, описывающий столовую
  */
 public class CanteenProvider {
+    static ArrayList<CanteenProvider> all = new ArrayList<>();
     private String name;
     private TimeSpan workTimeDef, breakTimeDef, workTimeSat, breakTimeSat; //Воскресение - выходной
     private Menu[] menus;
@@ -53,6 +54,7 @@ public class CanteenProvider {
         } catch (Exception e) {
             throw new RuntimeException("Menu failed to load");
         }
+        all.add(this);
     }
 
     /**

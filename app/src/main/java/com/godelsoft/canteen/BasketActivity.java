@@ -18,8 +18,7 @@ import java.util.Set;
 
 public class BasketActivity extends AppCompatActivity {
     static BasketActivity currentBasketActivity;
-    TextView description, emptyBasket;
-    ScrollView scrollView;
+    TextView description;
     Menu basketMenu;
     LinearLayout basketLinLay;
 
@@ -59,8 +58,8 @@ public class BasketActivity extends AppCompatActivity {
                 weight += food.getWeight() * Basket.getCount(id);
                 calories += food.getCalories() * Basket.getCount(id);
                 cost += food.getCost() * Basket.getCount(id);
-            }
-        }
+    }
+}
 
         if(count == 0){
             currentBasketActivity.findViewById(R.id.emptyBasket).setVisibility(View.VISIBLE);
@@ -106,7 +105,7 @@ public class BasketActivity extends AppCompatActivity {
             public int compare(Food food, Food t1) {
                 return food.getLabel().compareTo(t1.getLabel());
             }
-        });
+        }, false);
     }
 
     @Override
