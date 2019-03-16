@@ -63,7 +63,10 @@ public class CanteenProvider {
      * @return Меню на заданный день недели
      */
     public Menu getFoodList(int weekDay) {
-        return menus[weekDay]; //(day + 5) % 7
+        if(weekDay == 6)
+            return null;
+        else
+            return menus[weekDay]; //(day + 5) % 7
     }
 
 
