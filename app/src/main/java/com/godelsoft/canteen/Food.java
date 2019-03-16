@@ -17,14 +17,15 @@ import java.util.Locale;
  */
 
 public class Food {
-    public static String[] TYPES = { "Закуски", "Первое", "Второе", "Гарнир", "Хлебобулочные изделия", "Десерты", "Напитки" };
     public static SparseArray<Food> all = new SparseArray<>(); //Полный список еды <ID, Food>
+    public static String[] TypeNames = { "Закуски", "Первое", "Второе", "Гарнир", "Хлебобулочные изделия", "Десерты", "Напитки" };
 
     private String label, description;
     private int id;
     private double proteins, fats, carbohydrates, gramProteins, gramFats, gramCarbohydrates;
     private boolean vegetarian;
     private int type, weight, calories, cost;
+
 
     public Food(int id, int type, String label, int weight,
                 double proteins, double fats, double carbohydrates, int calories,
@@ -48,14 +49,6 @@ public class Food {
     }
 
     /**
-     * Изменение стоимости
-     * @param newCost Новая стоимость
-     */
-    public void setCost(int newCost){
-        this.cost = newCost;
-    }
-
-    /**
      * Создаёт карточку из объекта Food
      * @param context Контекст
      * @return cardView
@@ -69,8 +62,8 @@ public class Food {
         //TODO Установить соответствующую блюду картинку
 
         mLabel.setText(label);
-        mWeigth.setText("" + weight + context.getResources().getString(R.string.gram));
-        mCost.setText("" + (cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + context.getResources().getString(R.string.rub));
+        mWeigth.setText(String.format("%d%s", weight, context.getResources().getString(R.string.gram)));
+        mCost.setText(String.format("%d%s%s", cost / 100, ((cost % 100) == 0) ? "" : "." + (cost % 100), context.getResources().getString(R.string.rub)));
 
         Button minus = view.findViewById(R.id.minus);
         Button plus = view.findViewById(R.id.plus);
@@ -114,55 +107,24 @@ public class Food {
                 this.calories, this.vegetarian ? '+' : '-', this.cost);
     }
 
-    public int getId() {
-        return id;
+    public String getTypeName() {
+        return Food.TypeNames[this.type];
     }
 
-    public int getType() {
-        return type;
-    }
+    public static int getTypesCount() { return Food.TypeNames.length; }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public int getWeight(){
-        return weight;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public double getProteins() {
-        return proteins;
-    }
-
-    public double getFats() {
-        return fats;
-    }
-
-    public double getCarbohydrates() {
-        return carbohydrates;
-    }
-
-    public double getGramCarbohydrates() {
-        return gramCarbohydrates;
-    }
-
-    public double getGramFats() {
-        return gramFats;
-    }
-
-    public double getGramProteins() {
-        return gramProteins;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
+    //Getters (Holy Sharp)
+    public int getId() { return id; }
+    public int getType() { return type; }
+    public String getLabel() { return label; }
+    public int getWeight(){ return weight; }
+    public int getCalories() { return calories; }
+    public int getCost() { return cost; }
+    public double getProteins() { return proteins; }
+    public double getFats() { return fats; }
+    public double getCarbohydrates() { return carbohydrates; }
+    public double getGramCarbohydrates() { return gramCarbohydrates; }
+    public double getGramFats() { return gramFats; }
+    public double getGramProteins() { return gramProteins; }
+    public String getDescription() { return this.description; }
 }

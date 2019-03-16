@@ -19,35 +19,6 @@ public class Menu {
     private HashMap<Integer, ArrayList<Food>> typeToListFood = new HashMap<>(); //Списки продуктов по категориям type
 
     /**
-     * Конструктор, из массива id заполняет menu и typeToListFood
-     * @param ids Массив id
-     */
-    public Menu(int[] ids){
-        for(int id : ids){
-            Food food = Food.all.get(id);
-            menu.add(food);
-            if(!typeToListFood.containsKey(food.getType())){
-                typeToListFood.put(food.getType(), new ArrayList<Food>());
-            }
-            typeToListFood.get(food.getType()).add(food);
-        }
-    }
-
-    /**
-     * Конструктор, из массива блюд заполняет menu и typeToListFood
-     * @param foods Массив блюд
-     */
-    public Menu(ArrayList<Food> foods){
-        for(Food food : foods){
-            menu.add(food);
-            if(!typeToListFood.containsKey(food.getType())){
-                typeToListFood.put(food.getType(), new ArrayList<Food>());
-            }
-            typeToListFood.get(food.getType()).add(food);
-        }
-    }
-
-    /**
      * Конструктор по умолчанию
      */
     public Menu() {
@@ -79,12 +50,12 @@ public class Menu {
      */
     public void toScreen(LinearLayout ll, Context context, Comparator<Food> comparator){
         ll.removeAllViews();
-        for (int i = 0; i < Food.TYPES.length; i++){
+        for (int i = 0; i < Food.getTypesCount(); i++){
             if(typeToListFood.containsKey(i)){
 
                 View header = LayoutInflater.from(context).inflate(R.layout.header, null);
                 TextView h = header.findViewById(R.id.header);
-                h.setText(Food.TYPES[i]);
+                h.setText(Food.TypeNames[i]);
                 ll.addView(header);
 
                 Collections.sort(typeToListFood.get(i), comparator);
