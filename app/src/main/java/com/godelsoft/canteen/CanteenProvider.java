@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
  */
 public class CanteenProvider {
     static ArrayList<CanteenProvider> all = new ArrayList<>();
+
     private String name;
     private TimeSpan workTimeDef, breakTimeDef, workTimeSat, breakTimeSat; //Воскресение - выходной
     private Menu[] menus;
