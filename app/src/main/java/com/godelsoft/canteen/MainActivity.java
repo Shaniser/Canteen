@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle(getResources().getString(R.string.canteens));
 
         CanteenProvider[] canteens = new CanteenLoader().getCanteens();
-        Menu testMenu = canteens[0].getFoodList(0);
 
         Intent intent = new Intent(this, AboutCanteen.class);
         intent.putExtra("id", 0);
