@@ -77,20 +77,28 @@ public class Menu {
      * @param context Контекст
      * @param comparator - Критерий сортировки
      */
-    public void toScreen(LinearLayout ll, Context context, Comparator<Food> comparator){
+    public void toScreen(LinearLayout ll, Context context, Comparator<Food> comparator, boolean isGroups){
         ll.removeAllViews();
-        for (int i = 0; i < Food.TYPES.length; i++){
-            if(typeToListFood.containsKey(i)){
 
-                View header = LayoutInflater.from(context).inflate(R.layout.header, null);
-                TextView h = header.findViewById(R.id.header);
-                h.setText(Food.TYPES[i]);
-                ll.addView(header);
+        if(isGroups) {
+            for (int i = 0; i < Food.TYPES.length; i++) {
+                if (typeToListFood.containsKey(i)) {
 
-                Collections.sort(typeToListFood.get(i), comparator);
-                for(Food food : typeToListFood.get(i)){
-                    ll.addView(food.toCard(context));
+                    View header = LayoutInflater.from(context).inflate(R.layout.header, null);
+                    TextView h = header.findViewById(R.id.header);
+                    h.setText(Food.TYPES[i]);
+                    ll.addView(header);
+
+                    Collections.sort(typeToListFood.get(i), comparator);
+                    for (Food food : typeToListFood.get(i)) {
+                        ll.addView(food.toCard(context));
+                    }
                 }
+            }
+        }else{
+            Collections.sort(menu, comparator);
+            for (Food food : menu) {
+                ll.addView(food.toCard(context));
             }
         }
     }

@@ -12,6 +12,7 @@ import java.util.Locale;
  * Класс, описывающий столовую
  */
 public class CanteenProvider {
+    static ArrayList<CanteenProvider> all = new ArrayList<>();
     private String name;
     private TimeSpan workTimeDef, breakTimeDef, workTimeSat, breakTimeSat;
     private Menu[] menus;
@@ -57,6 +58,7 @@ public class CanteenProvider {
             //TODO
             throw new RuntimeException("Menu failed to load");
         }
+        all.add(this);
     }
 
     /**
