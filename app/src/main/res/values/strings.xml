@@ -35,6 +35,7 @@
     <string name="about_canteen">О столовой</string>
     <string name="canteen_label_sample">Столовая ГЗ</string>
     <string name="working_time_description">ПН-ПТ:\nПерерыв:\nСБ:\nПерерыв:</string>
+    <string name="working_time_description_no_saturday">ПН-ПТ:\nПерерыв:</string>
     <string name="working_time_sample">10:00-18:00\nНет\n11:30-16:00\n14:00-14:30</string>
     <string name="menu">Meню</string>
     <string name="filters">Фильтры</string>
@@ -53,6 +54,7 @@
     <string name="vegan_only">Только вегитерианские блюда</string>
     <string name="no">Нет</string>
     <string name="not_working">Не работает</string>
+    <string name="now_closed">Сейчас закрыто</string>
 
 
 </resources>
