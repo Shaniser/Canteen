@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
  */
 public class CanteenProvider {
     static ArrayList<CanteenProvider> all = new ArrayList<>();
+
     private String name;
     private TimeSpan workTimeDef, breakTimeDef, workTimeSat, breakTimeSat; //Воскресение - выходной
     private Menu[] menus;
@@ -108,62 +109,31 @@ public class CanteenProvider {
      * @param weekDay Номер дня недели (Начиная с нуля и понедельника)
      * @return Время работы или null если в этот день не работает
      */
-    public TimeSpan getWorkingTime(int weekDay) { return weekDay < 5 ? this.workTimeDef : this.workTimeSat; }
+    public TimeSpan getWorkingTime(int weekDay) {
+        if (weekDay < 5)
+            return this.workTimeDef;
+        else if (weekDay == 6)
+            return this.workTimeSat;
+        else
+            return null;
+    }
     /**
      * Получение времени перерыва столовой
      * @param weekDay Номер дня недели (Начиная с нуля и понедельника)
      * @return Время перерыва или null если работает без перерыва
      */
-    public TimeSpan getBreakTime(int weekDay) { return weekDay < 5 ? this.breakTimeDef : this.breakTimeSat; }
+    public TimeSpan getBreakTime(int weekDay) {
+        if (weekDay < 5)
+            return this.breakTimeDef;
+        else if (weekDay == 6)
+            return this.breakTimeSat;
+        else
+            return null;
+    }
 
     /**
      * Получение названия столовой
      * @return Название
      */
     public String getName() { return this.name; }
-
-
-    /**
-     * Возвращает имя столовой (DEPRECATED)
-     * @return Имя
-     */
-    @Deprecated
-    public String toString() {
-//        StringBuilder builder = new StringBuilder();
-//        builder.append(this.name).append("\n\n");
-//
-//        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
-//                this.workTimeDef.getOpenHour(), this.workTimeDef.getOpenMin(),
-//                this.workTimeDef.getCloseHour(), this.workTimeDef.getCloseMin()));
-//        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
-//                this.workTimeSat.getOpenHour(), this.workTimeSat.getOpenMin(),
-//                this.workTimeSat.getCloseHour(), this.workTimeSat.getCloseMin()));
-//        builder.append('\n');
-//
-//        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
-//                this.breakTimeDef.getOpenHour(), this.breakTimeDef.getOpenMin(),
-//                this.breakTimeDef.getCloseHour(), this.breakTimeDef.getCloseMin()));
-//        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
-//                this.breakTimeSat.getOpenHour(), this.breakTimeSat.getOpenMin(),
-//                this.breakTimeSat.getCloseHour(), this.breakTimeSat.getCloseMin()));
-//        builder.append('\n');
-//
-//        builder.append("START_DISHES\n");
-//        for (Food i : this.allDishes)
-//            builder.append(i.toString()).append('\n');
-//        builder.append("END_DISHES\n");
-//
-//        for (int i = 0; i < 7; i++)
-//            if (menus[i] == null)
-//                builder.append("-\n");
-//            else {
-//                ArrayList<Food> t = menus[i].getList();
-//                for (int j = 0; j < t.size() - 1; j++)
-//                    builder.append(t.get(j).getId()).append(':');
-//                builder.append(t.get(t.size() - 1)).append('\n');
-//            }
-//
-//        return builder.toString();
-        return this.name;
-    }
 }
