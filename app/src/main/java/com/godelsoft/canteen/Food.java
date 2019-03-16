@@ -45,14 +45,6 @@ public class Food {
     }
 
     /**
-     * Изменение стоимости
-     * @param newCost Новая стоимость
-     */
-    public void setCost(int newCost){
-        this.cost = newCost;
-    }
-
-    /**
      * Создаёт карточку из объекта Food
      * @param context Контекст
      * @return cardView
@@ -67,8 +59,8 @@ public class Food {
         //TODO Установить соответствующую блюду картинку
 
         mLabel.setText(label);
-        mWeigth.setText("" + weight + context.getResources().getString(R.string.gram));
-        mCost.setText("" + (cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + context.getResources().getString(R.string.rub));
+        mWeigth.setText(String.format("%d%s", weight, context.getResources().getString(R.string.gram)));
+        mCost.setText(String.format("%d%s%s", cost / 100, ((cost % 100) == 0) ? "" : "." + (cost % 100), context.getResources().getString(R.string.rub)));
         mCalories.setText("" + calories + context.getResources().getString(R.string.ccal));
 
         Button minus = view.findViewById(R.id.minus);
@@ -113,55 +105,24 @@ public class Food {
                 this.calories, this.vegetarian ? '+' : '-', this.cost);
     }
 
-    public int getId() {
-        return id;
+    public String getTypeName() {
+        return Food.TypeNames[this.type];
     }
 
-    public int getType() {
-        return type;
-    }
+    public static int getTypesCount() { return Food.TypeNames.length; }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public int getWeight(){
-        return weight;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public double getProteins() {
-        return proteins;
-    }
-
-    public double getFats() {
-        return fats;
-    }
-
-    public double getCarbohydrates() {
-        return carbohydrates;
-    }
-
-    public double getGramCarbohydrates() {
-        return gramCarbohydrates;
-    }
-
-    public double getGramFats() {
-        return gramFats;
-    }
-
-    public double getGramProteins() {
-        return gramProteins;
-    }
-
-    public boolean isVegetarian(){
-        return vegetarian;
-    }
+    //Getters (Holy Sharp)
+    public int getId() { return id; }
+    public int getType() { return type; }
+    public String getLabel() { return label; }
+    public int getWeight(){ return weight; }
+    public int getCalories() { return calories; }
+    public int getCost() { return cost; }
+    public double getProteins() { return proteins; }
+    public double getFats() { return fats; }
+    public double getCarbohydrates() { return carbohydrates; }
+    public double getGramCarbohydrates() { return gramCarbohydrates; }
+    public double getGramFats() { return gramFats; }
+    public double getGramProteins() { return gramProteins; }
+    public String getDescription() { return this.description; }
 }

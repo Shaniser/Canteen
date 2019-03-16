@@ -1,12 +1,8 @@
 package com.godelsoft.canteen;
 
-import android.support.annotation.NonNull;
-
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 /**
  * Класс, описывающий столовую
@@ -14,7 +10,7 @@ import java.util.Locale;
 public class CanteenProvider {
     static ArrayList<CanteenProvider> all = new ArrayList<>();
     private String name;
-    private TimeSpan workTimeDef, breakTimeDef, workTimeSat, breakTimeSat;
+    private TimeSpan workTimeDef, breakTimeDef, workTimeSat, breakTimeSat; //Воскресение - выходной
     private Menu[] menus;
     private ArrayList<Food> allDishes;
 
@@ -23,9 +19,9 @@ public class CanteenProvider {
      * @param data Строковое представление столовой и меню на текущую неделю
      */
     public CanteenProvider(String data) {
-        this.menus = new Menu[7];
+        this.menus = new Menu[6];
         try {
-            String[] arr = data.split("\n");
+            String[] arr = data.split("__END_LINE__\n");
             this.name = arr[0];
 
             this.workTimeDef = TimeSpan.fromString(arr[2]);
@@ -40,11 +36,12 @@ public class CanteenProvider {
                 allDishes.add(new Food(
                         Integer.parseInt(tarr[0]), Integer.parseInt(tarr[1]), tarr[2], Integer.parseInt(tarr[3]),
                         Double.parseDouble(tarr[4]), Double.parseDouble(tarr[5]), Double.parseDouble(tarr[6]),
-                        Integer.parseInt(tarr[7]), tarr[8].equals("+"), Integer.parseInt(tarr[9])));
+                        Integer.parseInt(tarr[7]), tarr[8].equals("+"), Integer.parseInt(tarr[9]),
+                        arr[ind].substring(arr[ind].indexOf("\"") + 1, arr[ind].length() - 1)));
                 ind++;
             }
 
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < 6; i++) {
                 if (arr[ind + i + 1].equals("-"))
                     this.menus[i] = null;
                 else {
@@ -55,7 +52,6 @@ public class CanteenProvider {
                 }
             }
         } catch (Exception e) {
-            //TODO
             throw new RuntimeException("Menu failed to load");
         }
         all.add(this);
@@ -76,7 +72,7 @@ public class CanteenProvider {
      * @param d Момент времени
      * @return true - если столовая работает, false - иначе
      */
-    public boolean isWorking(GregorianCalendar d) {
+    public boolean isWorking(Calendar d) {
         int curWeekDay = (d.get(Calendar.DAY_OF_WEEK) - 1 + 5) % 7;
         if (curWeekDay < 5) { //Mon-Fri
             if (this.workTimeDef == null)
@@ -128,45 +124,46 @@ public class CanteenProvider {
 
 
     /**
-     * Возвращает строку, пригодную для создания нового объекта CanteenProvider
-     * @return Строка
+     * Возвращает имя столовой (DEPRECATED)
+     * @return Имя
      */
-    @NonNull
+    @Deprecated
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(this.name).append("\n\n");
-
-        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
-                this.workTimeDef.getOpenHour(), this.workTimeDef.getOpenMin(),
-                this.workTimeDef.getCloseHour(), this.workTimeDef.getCloseMin()));
-        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
-                this.workTimeSat.getOpenHour(), this.workTimeSat.getOpenMin(),
-                this.workTimeSat.getCloseHour(), this.workTimeSat.getCloseMin()));
-        builder.append('\n');
-
-        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
-                this.breakTimeDef.getOpenHour(), this.breakTimeDef.getOpenMin(),
-                this.breakTimeDef.getCloseHour(), this.breakTimeDef.getCloseMin()));
-        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
-                this.breakTimeSat.getOpenHour(), this.breakTimeSat.getOpenMin(),
-                this.breakTimeSat.getCloseHour(), this.breakTimeSat.getCloseMin()));
-        builder.append('\n');
-
-        builder.append("START_DISHES\n");
-        for (Food i : this.allDishes)
-            builder.append(i.toString()).append('\n');
-        builder.append("END_DISHES\n");
-
-        for (int i = 0; i < 7; i++)
-            if (menus[i] == null)
-                builder.append("-\n");
-            else {
-                ArrayList<Food> t = menus[i].getList();
-                for (int j = 0; j < t.size() - 1; j++)
-                    builder.append(t.get(j).getId()).append(':');
-                builder.append(t.get(t.size() - 1)).append('\n');
-            }
-
-        return builder.toString();
+//        StringBuilder builder = new StringBuilder();
+//        builder.append(this.name).append("\n\n");
+//
+//        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
+//                this.workTimeDef.getOpenHour(), this.workTimeDef.getOpenMin(),
+//                this.workTimeDef.getCloseHour(), this.workTimeDef.getCloseMin()));
+//        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
+//                this.workTimeSat.getOpenHour(), this.workTimeSat.getOpenMin(),
+//                this.workTimeSat.getCloseHour(), this.workTimeSat.getCloseMin()));
+//        builder.append('\n');
+//
+//        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
+//                this.breakTimeDef.getOpenHour(), this.breakTimeDef.getOpenMin(),
+//                this.breakTimeDef.getCloseHour(), this.breakTimeDef.getCloseMin()));
+//        builder.append(String.format(Locale.US, "%d:%d:%d:%d",
+//                this.breakTimeSat.getOpenHour(), this.breakTimeSat.getOpenMin(),
+//                this.breakTimeSat.getCloseHour(), this.breakTimeSat.getCloseMin()));
+//        builder.append('\n');
+//
+//        builder.append("START_DISHES\n");
+//        for (Food i : this.allDishes)
+//            builder.append(i.toString()).append('\n');
+//        builder.append("END_DISHES\n");
+//
+//        for (int i = 0; i < 7; i++)
+//            if (menus[i] == null)
+//                builder.append("-\n");
+//            else {
+//                ArrayList<Food> t = menus[i].getList();
+//                for (int j = 0; j < t.size() - 1; j++)
+//                    builder.append(t.get(j).getId()).append(':');
+//                builder.append(t.get(t.size() - 1)).append('\n');
+//            }
+//
+//        return builder.toString();
+        return this.name;
     }
 }

@@ -39,20 +39,16 @@ public class AboutFood extends AppCompatActivity {
 
         //TODO Установить соответствующую блюду картинку
 
-        /**
-         * Основное описание
-         */
+        //Основное описание
         description = findViewById(R.id.description);
         StringBuilder builder = new StringBuilder();
-        builder.append(" " + Food.TYPES[food.getType()] + "\n");
-        builder.append(" " + food.getWeight() + getResources().getString(R.string.gram) + "\n");
-        builder.append(" " + food.getCalories() + getResources().getString(R.string.ccal) + "\n");
-        builder.append(" " + (food.getCost() / 100) + (((food.getCost() % 100) == 0) ? "" : "." + (food.getCost() % 100)) + getResources().getString(R.string.rub));
+        builder.append(String.format(" %s\n", food.getTypeName()));
+        builder.append(String.format(" %s%s\n", food.getWeight(), getResources().getString(R.string.gram)));
+        builder.append(String.format(" %s%s\n", food.getCalories(), getResources().getString(R.string.ccal)));
+        builder.append(String.format(" %s%s%s", food.getCost() / 100, (((food.getCost() % 100) == 0) ? "" : "." + (food.getCost() % 100)), getResources().getString(R.string.rub)));
         description.setText(builder);
 
-        /**
-         * Белки, жиры и углеводы
-         */
+        //Белки, жиры и углеводы
         TextView proteinsP = findViewById(R.id.proteinsP);
         ProgressBar progressBarProteins = findViewById(R.id.proteinsProgressBar);
         progressBarProteins.setProgress((int)(food.getProteins() * 100));
@@ -80,7 +76,7 @@ public class AboutFood extends AppCompatActivity {
             @Override
             public void set(int count){
                 double calories = food.getCalories() * count;
-                textView.setText(calories + getResources().getString(R.string.ccal));
+                textView.setText(String.format("%s%s", calories, getResources().getString(R.string.ccal)));
             }
         };
 
