@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,13 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
         CanteenProvider[] canteens = new CanteenLoader().getCanteens();
         Menu testMenu = canteens[0].getFoodList(0);
-
-        testMenu.toScreen((LinearLayout)findViewById(R.id.menuTestLinLay), this, new Comparator<Food>() {
-            @Override
-            public int compare(Food food, Food t1) {
-                return food.getCost() - t1.getCost();
-            }
-        }, true);
 
         Intent intent = new Intent(this, AboutCanteen.class);
         intent.putExtra("id", 0);

@@ -105,7 +105,7 @@ public class BasketActivity extends AppCompatActivity {
             public int compare(Food food, Food t1) {
                 return food.getLabel().compareTo(t1.getLabel());
             }
-        }, false);
+        }, false, false);
     }
 
     @Override

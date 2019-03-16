@@ -50,6 +50,7 @@
     <string name="cost_sort">По цене</string>
     <string name="calories_sort">По калорийности</string>
     <string name="canteen_not_working">Столовая не работает</string>
+    <string name="vegan_only">Только вегитерианские блюда</string>
 
 
 </resources>

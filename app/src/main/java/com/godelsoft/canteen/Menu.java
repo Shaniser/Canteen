@@ -48,28 +48,40 @@ public class Menu {
      * @param context Контекст
      * @param comparator - Критерий сортировки
      */
-    public void toScreen(LinearLayout ll, Context context, Comparator<Food> comparator, boolean isGroups){
+    public void toScreen(LinearLayout ll, Context context, Comparator<Food> comparator, boolean isGroups, boolean vegetarianOnly){
         ll.removeAllViews();
 
         if(isGroups) {
             for (int i = 0; i < Food.getTypesCount(); i++) {
                 if (typeToListFood.containsKey(i)) {
+                    boolean containsVegetarian = false;
+                    if(vegetarianOnly){
+                        for (Food food : typeToListFood.get(i)) {
+                            containsVegetarian |= food.isVegetarian();
+                        }
+                    }
 
-                    View header = LayoutInflater.from(context).inflate(R.layout.header, null);
-                    TextView h = header.findViewById(R.id.header);
-                    h.setText(Food.TypeNames[i]);
-                    ll.addView(header);
+                    if(!vegetarianOnly || containsVegetarian){
+                        View header = LayoutInflater.from(context).inflate(R.layout.header, null);
+                        TextView h = header.findViewById(R.id.header);
+                        h.setText(Food.TypeNames[i]);
+                        ll.addView(header);
+                    }
 
                     Collections.sort(typeToListFood.get(i), comparator);
                     for (Food food : typeToListFood.get(i)) {
-                        ll.addView(food.toCard(context));
+                        if(!vegetarianOnly || food.isVegetarian()){
+                            ll.addView(food.toCard(context));
+                        }
                     }
                 }
             }
         }else{
             Collections.sort(menu, comparator);
             for (Food food : menu) {
-                ll.addView(food.toCard(context));
+                if(!vegetarianOnly || food.isVegetarian()){
+                    ll.addView(food.toCard(context));
+                }
             }
         }
     }
