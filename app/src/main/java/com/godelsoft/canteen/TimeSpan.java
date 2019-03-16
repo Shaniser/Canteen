@@ -69,7 +69,7 @@ public class TimeSpan {
      * @param time Момент вермени
      * @return Вхождение в промежуток
      */
-    public boolean isInInterval(GregorianCalendar time) {
+    public boolean isInInterval(Calendar time) {
         return
                 (this.openHour < time.get(Calendar.HOUR_OF_DAY) ||
                     (this.openHour == time.get(Calendar.HOUR_OF_DAY) && this.openMin <= time.get(Calendar.MINUTE))) &&

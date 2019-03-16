@@ -20,13 +20,15 @@ public class Food {
     public static String[] TYPES = { "Закуски", "Первое", "Второе", "Гарнир", "Хлебобулочные изделия", "Десерты", "Напитки" };
     public static SparseArray<Food> all = new SparseArray<>(); //Полный список еды <ID, Food>
 
-    private String label;
+    private String label, description;
     private int id;
     private double proteins, fats, carbohydrates, gramProteins, gramFats, gramCarbohydrates;
     private boolean vegetarian;
     private int type, weight, calories, cost;
 
-    public Food(int id, int type, String label, int weight, double proteins, double fats, double carbohydrates, int calories, boolean vegetarian, int costInKopecks){
+    public Food(int id, int type, String label, int weight,
+                double proteins, double fats, double carbohydrates, int calories,
+                boolean vegetarian, int costInKopecks, String description){
         this.id = id;
         this.type = type;
         this.label = label;
@@ -40,6 +42,7 @@ public class Food {
         this.vegetarian = vegetarian;
         this.cost = costInKopecks;
         this.calories = calories;
+        this.description = description;
 
         all.put(id, this);
     }
@@ -157,5 +160,9 @@ public class Food {
 
     public double getGramProteins() {
         return gramProteins;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }
