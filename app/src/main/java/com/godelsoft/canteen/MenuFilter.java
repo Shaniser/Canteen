@@ -65,7 +65,7 @@ public class MenuFilter {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public void setVegan(boolean vegan){
+    public void setVegetarian(boolean vegan){
         this.isVegan = vegan;
     }
 
@@ -78,7 +78,7 @@ public class MenuFilter {
         return comparator;
     }
 
-    public boolean getIsVegan(){
+    public boolean getIsVegetarian(){
         return isVegan;
     }
 

@@ -96,14 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
         CanteenProvider provider = new CanteenProvider(data1);
 
-        Menu testMenu = provider.getFoodList(0);
-        testMenu.toScreen((LinearLayout)findViewById(R.id.menuTestLinLay), this, new Comparator<Food>() {
-            @Override
-            public int compare(Food food, Food t1) {
-                return food.getCost() - t1.getCost();
-            }
-        }, true);
-
         Intent intent = new Intent(this, AboutCanteen.class);
         intent.putExtra("id", 0);
         startActivity(intent);

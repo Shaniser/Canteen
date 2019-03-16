@@ -9,6 +9,8 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -55,6 +57,14 @@ public class AboutCanteen extends AppCompatActivity {
             }
 
         });
+
+        ((CheckBox) findViewById(R.id.isVegetarian)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                filter.setVegetarian(b);
+                applyFilters((LinearLayout) findViewById(R.id.menuLinLay), canteen, context);
+            }
+        });
     }
 
     public void applyFilters(final LinearLayout linearLayout, final CanteenProvider canteenProvider, final Context context){
@@ -89,13 +99,11 @@ public class AboutCanteen extends AppCompatActivity {
                         applyFilters(linearLayout, canteenProvider, context);
                     }
                 });
-
-
             }
 
             filter.setComparator(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
 
-            canteenProvider.getFoodList(filter.getDayOfWeek()).toScreen(linearLayout, context, filter.getComparator(), filter.isGroups());
+            canteenProvider.getFoodList(filter.getDayOfWeek()).toScreen(linearLayout, context, filter.getComparator(), filter.isGroups(), filter.getIsVegetarian());
         }else{
 
             for (int i = 0; i < dayCards.length; i++) {

@@ -160,4 +160,8 @@ public class Food {
     public double getGramProteins() {
         return gramProteins;
     }
+
+    public boolean isVegetarian(){
+        return vegetarian;
+    }
 }
