@@ -22,7 +22,21 @@ public class MenuFilter {
         add(new Comparator<Food>() {
             @Override
             public int compare(Food food, Food t1) {
+                return food.getCost() - t1.getCost();
+            }
+        });
+
+        add(new Comparator<Food>() {
+            @Override
+            public int compare(Food food, Food t1) {
                 return - food.getCost() + t1.getCost();
+            }
+        });
+
+        add(new Comparator<Food>() {
+            @Override
+            public int compare(Food food, Food t1) {
+                return food.getCalories() - t1.getCalories();
             }
         });
 
