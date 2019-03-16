@@ -2,7 +2,6 @@ package com.godelsoft.canteen;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Класс, описывающий столовую
@@ -100,7 +99,7 @@ public class CanteenProvider {
      * @return true - если столовая работает, false - иначе
      */
     public boolean isWorking() {
-        return isWorking(new GregorianCalendar());
+        return isWorking(Calendar.getInstance());
     }
 
 
