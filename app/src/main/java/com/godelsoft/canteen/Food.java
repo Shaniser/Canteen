@@ -63,11 +63,13 @@ public class Food {
         TextView mLabel = view.findViewById(R.id.label);
         TextView mWeigth = view.findViewById(R.id.weigth);
         TextView mCost = view.findViewById(R.id.cost);
+        TextView mCalories = view.findViewById(R.id.calories);
         //TODO Установить соответствующую блюду картинку
 
         mLabel.setText(label);
         mWeigth.setText("" + weight + context.getResources().getString(R.string.gram));
         mCost.setText("" + (cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + context.getResources().getString(R.string.rub));
+        mCalories.setText("" + calories + context.getResources().getString(R.string.ccal));
 
         Button minus = view.findViewById(R.id.minus);
         Button plus = view.findViewById(R.id.plus);

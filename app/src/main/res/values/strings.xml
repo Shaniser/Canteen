@@ -46,7 +46,7 @@
     <string name="friday">ПТ</string>
     <string name="saturday">СБ</string>
     <string name="alphabet_sort">По алфавиту</string>
-    <string name="group_sort">По разделу</string>
+    <string name="group_sort">По разделам</string>
     <string name="cost_sort">По цене</string>
     <string name="calories_sort">По калорийности</string>
     <string name="canteen_not_working">Столовая не работает</string>
