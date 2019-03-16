@@ -30,6 +30,33 @@ public class AboutCanteen extends AppCompatActivity {
         int id = getIntent().getExtras().getInt("id");
         final CanteenProvider canteen = CanteenProvider.all.get(id);
 
+        int currentDay = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
+
+        TextView workingTime = findViewById(R.id.workingTime);
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("%s\n", canteen.getWorkingTime(currentDay)));
+        TimeSpan breakTime = canteen.getBreakTime(currentDay);
+        if(breakTime != null){
+            builder.append(String.format("%s\n", breakTime));
+        }else{
+            builder.append(String.format("%s\n", getResources().getString(R.string.no)));
+        }
+
+        TimeSpan saturdayWorking = canteen.getWorkingTime(5);
+        if(saturdayWorking != null){
+            builder.append(String.format("%s\n", saturdayWorking));
+            TimeSpan saturdayBreak = canteen.getBreakTime(5);
+            if(saturdayBreak != null){
+                builder.append(String.format("%s\n", saturdayBreak));
+            }else{
+                builder.append(String.format("%s", getResources().getString(R.string.no)));
+            }
+        }else{
+            builder.append(String.format("%s\n", getResources().getString(R.string.not_working)));
+            builder.append(String.format("%s", getResources().getString(R.string.no)));
+        }
+        workingTime.setText(builder);
+
         sortFilters = new String[] { getResources().getString(R.string.group_sort), getResources().getString(R.string.alphabet_sort), getResources().getString(R.string.cost_sort) + "▲", getResources().getString(R.string.cost_sort) + "▼", getResources().getString(R.string.calories_sort) + "▲", getResources().getString(R.string.calories_sort) + "▼" };
 
         Spinner spinner = findViewById(R.id.spinner);
@@ -70,7 +97,6 @@ public class AboutCanteen extends AppCompatActivity {
     public void applyFilters(final LinearLayout linearLayout, final CanteenProvider canteenProvider, final Context context){
         int currentDay = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
 
-
         if(canteenProvider.getFoodList(filter.getDayOfWeek()) != null) {
             for (int i = 0; i < dayCards.length; i++) {
                 if (filter.getDayOfWeek() == i) {
@@ -93,7 +119,7 @@ public class AboutCanteen extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         int dayIndex = 0;
-                        for (; dayCards[dayIndex] != view && dayIndex < 7; dayIndex++) {
+                        for (; dayCards[dayIndex] != view; dayIndex++) {
                         }
                         filter.setDayOfWeek(dayIndex);
                         applyFilters(linearLayout, canteenProvider, context);
