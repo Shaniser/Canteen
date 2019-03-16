@@ -27,6 +27,20 @@ public class TimeSpan {
     }
 
     /**
+     * Создание нового объекта
+     * @param str Строка в формате "%d:%d:%d:%d" или "-"
+     * @return Новый объект или null
+     */
+    public static TimeSpan fromString(String str) {
+        if (str.equals("-"))
+            return null;
+        else {
+            String[] tarr = str.split(":");
+            return new TimeSpan(Integer.parseInt(tarr[0]), Integer.parseInt(tarr[1]), Integer.parseInt(tarr[2]), Integer.parseInt(tarr[3]));
+        }
+    }
+
+    /**
      * Получение часа начала промежутка
      * @return Час
      */
