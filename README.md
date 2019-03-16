@@ -13,6 +13,7 @@ class Food {
     boolean vegetarian;
     int cost; //В копейках
     int calories; //В Килокалориях
+    String description;
 }
 
 class Menu {
@@ -31,6 +32,7 @@ class Basket {
 *Исправить структуру пректа\
 *Распределить задачи\
 *Все вспомогательные файлы держать отдельно от `project` в соответствующей директории
+*Наполнить dishes.txt едой
 
 ## Вспомогательные структуры:
 ``` java
