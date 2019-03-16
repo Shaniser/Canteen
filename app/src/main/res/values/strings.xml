@@ -32,4 +32,24 @@
     <string name="count">Количество: </string>
     <string name="canteens">Столовые</string>
     <string name="empty_basket">Корзина пока пуста</string>
+    <string name="about_canteen">О столовой</string>
+    <string name="canteen_label_sample">Столовая ГЗ</string>
+    <string name="working_time_description">ПН-ПТ:\nПерерыв:\nСБ:\nПерерыв:</string>
+    <string name="working_time_sample">10:00-18:00\nНет\n11:30-16:00\n14:00-14:30</string>
+    <string name="menu">Meню</string>
+    <string name="filters">Фильтры</string>
+    <string name="now_opened">Сейчас открыто</string>
+    <string name="monday">ПН</string>
+    <string name="tuesday">ВТ</string>
+    <string name="wednesday">СР</string>
+    <string name="thursday">ЧТ</string>
+    <string name="friday">ПТ</string>
+    <string name="saturday">СБ</string>
+    <string name="alphabet_sort">По алфавиту</string>
+    <string name="group_sort">По разделу</string>
+    <string name="cost_sort">По цене</string>
+    <string name="calories_sort">По калорийности</string>
+    <string name="canteen_not_working">Столовая не работает</string>
+
+
 </resources>

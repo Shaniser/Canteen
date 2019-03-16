@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 "4:2:Куриные голени запеченые:60:13.94:5.75:0:111:-:5500\n" +
                 "5:3:Рис вареный:120:3.29:0.42:29.49:139:+:4000\n" +
                 "6:3:Гречка отварная:115:3.7:4.8:21.91:138:+:6000\n" +
-                "7:3:Картофель запеченный:120:3.13:2.99:17.61:108:+:4000\n" +
+                "7:3:Картофель запеченный:125:3.13:2.99:17.61:108:+:4500\n" +
                 "8:3:Красная фасоль:115:0.34:5.25:15.59:85:+:3000\n" +
                 "9:4:Хлеб черный:26:1.72:0.31:11.29:52:+:1000\n" +
                 "10:6:Чай черный:120:0:0:0.71:2:+:2000\n" +
@@ -102,7 +102,12 @@ public class MainActivity extends AppCompatActivity {
             public int compare(Food food, Food t1) {
                 return food.getCost() - t1.getCost();
             }
-        });
+        }, true);
+
+        Intent intent = new Intent(this, AboutCanteen.class);
+        intent.putExtra("id", 0);
+        startActivity(intent);
+
     }
 
     @Override
