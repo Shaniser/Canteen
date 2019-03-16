@@ -27,15 +27,18 @@ public class AboutCanteen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_canteen);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(getResources().getString(R.string.about_canteen));
+
         int id = getIntent().getExtras().getInt("id");
         final CanteenProvider canteen = CanteenProvider.all.get(id);
 
-        int currentDay = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
-
         TextView workingTime = findViewById(R.id.workingTime);
         StringBuilder builder = new StringBuilder();
-        builder.append(String.format("%s\n", canteen.getWorkingTime(currentDay)));
-        TimeSpan breakTime = canteen.getBreakTime(currentDay);
+        builder.append(String.format("%s\n", canteen.getWorkingTime(0)));
+        TimeSpan breakTime = canteen.getBreakTime(0);
         if(breakTime != null){
             builder.append(String.format("%s\n", breakTime));
         }else{
@@ -57,6 +60,8 @@ public class AboutCanteen extends AppCompatActivity {
         }
         workingTime.setText(builder);
 
+
+
         sortFilters = new String[] { getResources().getString(R.string.group_sort), getResources().getString(R.string.alphabet_sort), getResources().getString(R.string.cost_sort) + "▲", getResources().getString(R.string.cost_sort) + "▼", getResources().getString(R.string.calories_sort) + "▲", getResources().getString(R.string.calories_sort) + "▼" };
 
         Spinner spinner = findViewById(R.id.spinner);
@@ -64,10 +69,11 @@ public class AboutCanteen extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getResources().getString(R.string.about_canteen));
-
-        dayCards = new CardView[] {findViewById(R.id.dayCard), findViewById(R.id.dayCard1), findViewById(R.id.dayCard2), findViewById(R.id.dayCard3), findViewById(R.id.dayCard4), findViewById(R.id.dayCard5)};
+        if(saturdayWorking != null){
+            dayCards = new CardView[] {findViewById(R.id.dayCard), findViewById(R.id.dayCard1), findViewById(R.id.dayCard2), findViewById(R.id.dayCard3), findViewById(R.id.dayCard4), findViewById(R.id.dayCard5)};
+        }else{
+            dayCards = new CardView[] {findViewById(R.id.dayCard), findViewById(R.id.dayCard1), findViewById(R.id.dayCard2), findViewById(R.id.dayCard3), findViewById(R.id.dayCard4)};
+        }
 
         applyFilters((LinearLayout) findViewById(R.id.menuLinLay), canteen, this);
 
