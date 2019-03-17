@@ -14,7 +14,7 @@ public class CanteenLoader {
     public CanteenLoader(AssetManager manager) {
         this.manager = manager;
         this.canteens = new ArrayList<>();
-        String files[] = loadAssetData("menus/canteensList.txt").split("\n");
+        String files[] = loadAssetData("canteensList.txt").split("\n");
         for (String s : files)
             this.canteens.add(new CanteenProvider(loadAssetData(String.format("menus/%s", s))));
     }
