@@ -1,4 +1,15 @@
 # Canteen
+<ul>
+    <li><a href="https://github.com/Shaniser/Canteen/tree/master/app/src/main/java/com/godelsoft/canteen">Основные классы</a>
+        <ul>
+            <li><a href="https://github.com/Shaniser/Canteen/blob/master/app/src/main/java/com/godelsoft/canteen/MainActivity.java">MainActivity</a> - Точка входа в приложение</li>
+            <li><a href="https://github.com/Shaniser/Canteen/blob/master/app/src/main/java/com/godelsoft/canteen/CanteenLoader.java">CanteenLoader</a> - Класс получения данных о столовых и их меню</li>
+            <li><a href="https://github.com/Shaniser/Canteen/blob/master/app/src/main/java/com/godelsoft/canteen/CanteenProvider.java">CanteenProvider</a> - Класс, предоставляющий информацию о столовой и меню</li>
+        </ul></li>
+    <li><a href="https://github.com/Shaniser/Canteen/tree/master/app/src/main/assets/menus">Информация о столовых и меню</a></li>
+    <li><a href="https://github.com/Shaniser/Canteen/blob/master/dishes.txt">Список используемых блюд</a></li>
+</ul>
+
 
 ## Текущая структура проекта
 ```java
@@ -42,29 +53,28 @@ public enum FoodType {
     Hot, //Вторые блюда
     Garnish, //Гарниры
     Bakery, //Хлебобулочные изделия
-    Desert, //Пустыня
+    Desert, //Десерты (+Пустыня)
     Drink, //Напитки
 }
 
 public class TextListener {
     public TextView textView;
 
-    public TextListener(TextView textView, int listenId){
-        this.textView = textView;
-        ...
-    }
+    public TextListener(TextView textView, int listenId) //
 
-    public static void change(int listenId, String text){
-        //All listeners with "listenId" change textView.text to text
-    }
+    public static void change(int listenId, String text) //
 
-    public void setText(String text){
-        textView.setText(text);
-    }
+    public void setText(String text) //
 }
 
 public class TimeSpan {
-    ...
+    public TimeSpan(int openHour, int openMin, int closeHour, int closeMin) //
+
+    public static TimeSpan fromString(String str) //
+    
+    public boolean isInInterval(Calendar time) //
+    
+    public String toString() //
 }
 ```
 
