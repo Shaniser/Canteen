@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class AboutFood extends AppCompatActivity {
     Food food;
     Button minus, plus;
-    TextView countInBasket, label, description;
+    TextView label, description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

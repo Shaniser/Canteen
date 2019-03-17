@@ -108,7 +108,8 @@
                 android:background="@drawable/little_minus"
                 app:layout_constraintDimensionRatio="h,1:1"
                 app:layout_constraintEnd_toStartOf="@+id/count"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:foreground="@drawable/ripple_round"/>
 
             <Button
                 android:id="@+id/plus"
@@ -118,7 +119,8 @@
                 android:background="@drawable/little_plus"
                 app:layout_constraintDimensionRatio="h,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:foreground="@drawable/ripple_round"/>
 
             <TextView
                 android:id="@+id/count"
