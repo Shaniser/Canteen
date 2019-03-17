@@ -96,7 +96,7 @@ public class CanteenProvider {
                 return this.workTimeDef.isInInterval(d) &&
                         !this.breakTimeDef.isInInterval(d);
         }
-        else { //Sat
+        else if (curWeekDay == 6) { //Sat
             if (this.workTimeSat == null)
                 return false;
             if (breakTimeSat == null)
@@ -105,6 +105,8 @@ public class CanteenProvider {
                 return this.workTimeSat.isInInterval(d) &&
                         !this.breakTimeSat.isInInterval(d);
         }
+        else
+            return false;
     }
 
     /**

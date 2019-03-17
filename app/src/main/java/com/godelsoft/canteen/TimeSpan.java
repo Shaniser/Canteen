@@ -78,6 +78,6 @@ public class TimeSpan {
 
     @NonNull
     public String toString() {
-        return String.format(Locale.US, "%d:%d-%d:%d", this.openHour, this.openMin, this.closeHour, this.closeMin);
+        return String.format(Locale.US, "%02d:%02d-%02d:%02d", this.openHour, this.openMin, this.closeHour, this.closeMin);
     }
 }
