@@ -1,5 +1,15 @@
 package com.godelsoft.canteen;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.util.SparseArray;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -8,7 +18,9 @@ import java.util.GregorianCalendar;
  * Класс, описывающий столовую
  */
 public class CanteenProvider {
-    static ArrayList<CanteenProvider> all = new ArrayList<>();
+    static SparseArray<CanteenProvider> all = new SparseArray<>();
+    static int currentId;
+    private int id;
     private String name;
     private TimeSpan workTimeDef, breakTimeDef, workTimeSat, breakTimeSat; //Воскресение - выходной
     private Menu[] menus;
@@ -54,7 +66,8 @@ public class CanteenProvider {
         } catch (Exception e) {
             throw new RuntimeException("Menu failed to load");
         }
-        all.add(this);
+        this.id = currentId++;
+        all.put(id, this);
     }
 
     /**
@@ -125,6 +138,36 @@ public class CanteenProvider {
      */
     public String getName() { return this.name; }
 
+    /**
+     * Создаёт карточку из объекта Canteen
+     * @return View
+     */
+    public View toCard(final Context context){
+        View view = LayoutInflater.from(context).inflate(R.layout.canteen_card, null);
+        TextView label = view.findViewById(R.id.label);
+        TextView isOpened = view.findViewById(R.id.isOpened);
+
+        label.setText(getName());
+        if(isWorking()){
+            isOpened.setText(context.getResources().getString(R.string.now_opened));
+            isOpened.setTextColor(Color.parseColor("#0CB267"));
+        }else{
+            isOpened.setText(context.getResources().getString(R.string.now_closed));
+            isOpened.setTextColor(Color.parseColor("#e0554a"));
+        }
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AboutCanteen.class);
+                intent.putExtra("id", id);
+                context.startActivity(intent);
+            }
+        });
+
+        return view;
+    }
+
 
     /**
      * Возвращает имя столовой (DEPRECATED)
@@ -168,5 +211,9 @@ public class CanteenProvider {
 //
 //        return builder.toString();
         return this.name;
+    }
+
+    public int getId() {
+        return id;
     }
 }

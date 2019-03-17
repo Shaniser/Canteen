@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,11 +17,11 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.canteens));
 
+        LinearLayout linearLayout = findViewById(R.id.canteenLinLay);
         CanteenProvider[] canteens = new CanteenLoader().getCanteens();
-
-        Intent intent = new Intent(this, AboutCanteen.class);
-        intent.putExtra("id", 0);
-        startActivity(intent);
+        for (CanteenProvider canteenProvider : canteens){
+            linearLayout.addView(canteenProvider.toCard(this));
+        }
 
     }
 

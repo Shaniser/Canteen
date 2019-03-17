@@ -40,6 +40,8 @@ public class AboutCanteen extends AppCompatActivity {
         int id = getIntent().getExtras().getInt("id");
         final CanteenProvider canteen = CanteenProvider.all.get(id);
 
+        ((TextView) findViewById(R.id.header)).setText(canteen.getName());
+
         TextView isOpened = findViewById(R.id.isOpened);
         if(canteen.isWorking()){
             isOpened.setText(getResources().getString(R.string.now_opened));
