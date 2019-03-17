@@ -1,11 +1,14 @@
 package com.godelsoft.canteen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -32,22 +36,33 @@ public class AboutCanteen extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.about_canteen));
 
+
         int id = getIntent().getExtras().getInt("id");
         final CanteenProvider canteen = CanteenProvider.all.get(id);
 
+        ((TextView) findViewById(R.id.header)).setText(canteen.getName());
+
+        TextView isOpened = findViewById(R.id.isOpened);
+        if(canteen.isWorking()){
+            isOpened.setText(getResources().getString(R.string.now_opened));
+            isOpened.setTextColor(Color.parseColor("#0CB267"));
+        }else{
+            isOpened.setText(getResources().getString(R.string.now_closed));
+            isOpened.setTextColor(Color.parseColor("#e0554a"));
+        }
         TextView workingTime = findViewById(R.id.workingTime);
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("%s\n", canteen.getWorkingTime(0)));
         TimeSpan breakTime = canteen.getBreakTime(0);
         if(breakTime != null){
-            builder.append(String.format("%s\n", breakTime));
+            builder.append(String.format("%s", breakTime));
         }else{
-            builder.append(String.format("%s\n", getResources().getString(R.string.no)));
+            builder.append(String.format("%s", getResources().getString(R.string.no)));
         }
 
         TimeSpan saturdayWorking = canteen.getWorkingTime(5);
         if(saturdayWorking != null){
-            builder.append(String.format("%s\n", saturdayWorking));
+            builder.append(String.format("\n%s\n", saturdayWorking));
             TimeSpan saturdayBreak = canteen.getBreakTime(5);
             if(saturdayBreak != null){
                 builder.append(String.format("%s\n", saturdayBreak));
@@ -55,8 +70,7 @@ public class AboutCanteen extends AppCompatActivity {
                 builder.append(String.format("%s", getResources().getString(R.string.no)));
             }
         }else{
-            builder.append(String.format("%s\n", getResources().getString(R.string.not_working)));
-            builder.append(String.format("%s", getResources().getString(R.string.no)));
+            ((TextView) findViewById(R.id.workingTimeDescription)).setText(getResources().getString(R.string.working_time_description_no_saturday));
         }
         workingTime.setText(builder);
 
@@ -73,6 +87,7 @@ public class AboutCanteen extends AppCompatActivity {
             dayCards = new CardView[] {findViewById(R.id.dayCard), findViewById(R.id.dayCard1), findViewById(R.id.dayCard2), findViewById(R.id.dayCard3), findViewById(R.id.dayCard4), findViewById(R.id.dayCard5)};
         }else{
             dayCards = new CardView[] {findViewById(R.id.dayCard), findViewById(R.id.dayCard1), findViewById(R.id.dayCard2), findViewById(R.id.dayCard3), findViewById(R.id.dayCard4)};
+            ((TableRow) findViewById(R.id.days)).removeView(findViewById(R.id.dayCard5));
         }
 
         applyFilters((LinearLayout) findViewById(R.id.menuLinLay), canteen, this);
@@ -109,15 +124,11 @@ public class AboutCanteen extends AppCompatActivity {
                     dayCards[i].setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(Color.parseColor("#ffffff"));
                 } else {
-                    if(canteenProvider.getFoodList(i) != null) {
                         if (i == currentDay) {
                             ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(getResources().getColor(R.color.colorPrimary));
                         } else {
                             ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(Color.parseColor("#737373"));
                         }
-                    }else{
-                        ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(Color.parseColor("#e0554a"));
-                    }
                     dayCards[i].setCardBackgroundColor(Color.parseColor("#ffffff"));
                 }
 
@@ -139,21 +150,13 @@ public class AboutCanteen extends AppCompatActivity {
         }else{
 
             for (int i = 0; i < dayCards.length; i++) {
-                if (canteenProvider.getFoodList(i) == null && filter.getDayOfWeek() == i) {
-                    dayCards[i].setCardBackgroundColor(Color.parseColor("#e0554a"));
-                    ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(Color.parseColor("#ffffff"));
+                if (i == currentDay) {
+                      ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(getResources().getColor(R.color.colorPrimary));
                 } else {
-                    if(canteenProvider.getFoodList(i) != null) {
-                        if (i == currentDay) {
-                            ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(getResources().getColor(R.color.colorPrimary));
-                        } else {
-                            ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(Color.parseColor("#737373"));
-                        }
-                    }else{
-                        ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(Color.parseColor("#e0554a"));
-                    }
-                    dayCards[i].setCardBackgroundColor(Color.parseColor("#ffffff"));
+                       ((TextView) dayCards[i].findViewById(R.id.weekDay)).setTextColor(Color.parseColor("#737373"));
                 }
+                dayCards[i].setCardBackgroundColor(Color.parseColor("#ffffff"));
+
 
                 dayCards[i].setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -173,6 +176,27 @@ public class AboutCanteen extends AppCompatActivity {
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             linearLayout.removeAllViews();
             linearLayout.addView(textView);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.basket:
+                Intent intent = new Intent(this, BasketActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
