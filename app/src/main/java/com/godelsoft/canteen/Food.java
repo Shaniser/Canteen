@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -17,7 +16,7 @@ import java.util.Locale;
  */
 
 public class Food {
-    public static String[] TypeNames = { "Закуски", "Первое", "Второе", "Гарнир", "Хлебобулочные изделия", "Десерты", "Напитки" };
+    public static String[] TypeNames = { "Салаты", "Первые блюда", "Вторые блюда", "Гарниры", "Хлебобулочные изделия", "Десерты", "Напитки" };
     public static SparseArray<Food> all = new SparseArray<>(); //Полный список еды <ID, Food>
 
     private String label, description;
@@ -62,7 +61,7 @@ public class Food {
         mLabel.setText(label);
         mWeigth.setText(String.format("%d%s", weight, context.getResources().getString(R.string.gram)));
         mCost.setText(String.format("%d%s%s", cost / 100, ((cost % 100) == 0) ? "" : "." + (cost % 100), context.getResources().getString(R.string.rub)));
-        mCalories.setText("" + calories + context.getResources().getString(R.string.ccal));
+        mCalories.setText(String.format("%d%s", calories + context.getResources().getString(R.string.ccal)));
 
         Button minus = view.findViewById(R.id.minus);
         Button plus = view.findViewById(R.id.plus);
