@@ -86,7 +86,7 @@ public class CanteenProvider {
      * @return true - если столовая работает, false - иначе
      */
     public boolean isWorking(Calendar d) {
-        int curWeekDay = (d.get(Calendar.DAY_OF_WEEK) - 1 + 5) % 7;
+        int curWeekDay = (d.get(Calendar.DAY_OF_WEEK) + 5) % 7;
         if (curWeekDay < 5) { //Mon-Fri
             if (this.workTimeDef == null)
                 return false;
@@ -96,7 +96,7 @@ public class CanteenProvider {
                 return this.workTimeDef.isInInterval(d) &&
                         !this.breakTimeDef.isInInterval(d);
         }
-        else if (curWeekDay == 6) { //Sat
+        else if (curWeekDay == 5) { //Sat
             if (this.workTimeSat == null)
                 return false;
             if (breakTimeSat == null)
@@ -126,7 +126,7 @@ public class CanteenProvider {
     public TimeSpan getWorkingTime(int weekDay) {
         if (weekDay < 5)
             return this.workTimeDef;
-        else if (weekDay == 6)
+        else if (weekDay == 5)
             return this.workTimeSat;
         else
             return null;
@@ -139,7 +139,7 @@ public class CanteenProvider {
     public TimeSpan getBreakTime(int weekDay) {
         if (weekDay < 5)
             return this.breakTimeDef;
-        else if (weekDay == 6)
+        else if (weekDay == 5)
             return this.breakTimeSat;
         else
             return null;
