@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle(getResources().getString(R.string.canteens));
 
         LinearLayout linearLayout = findViewById(R.id.canteenLinLay);
-        CanteenProvider[] canteens = new CanteenLoader().getCanteens();
+
+        CanteenProvider[] canteens = new CanteenLoader(getAssets()).getCanteens();
         for (CanteenProvider canteenProvider : canteens){
             linearLayout.addView(canteenProvider.toCard(this));
         }
