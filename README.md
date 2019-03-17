@@ -1,4 +1,23 @@
 # Canteen
+<ul>
+    <li><a href="https://github.com/Shaniser/Canteen/tree/master/app/src/main/java/com/godelsoft/canteen">Основные классы</a>
+        <ul>
+            <li><a href="https://github.com/Shaniser/Canteen/blob/master/app/src/main/java/com/godelsoft/canteen/MainActivity.java">MainActivity</a> - Точка входа в приложение</li>
+            <li><a href="https://github.com/Shaniser/Canteen/blob/master/app/src/main/java/com/godelsoft/canteen/CanteenLoader.java">CanteenLoader</a> - Класс получения данных о столовых и их меню</li>
+            <li><a href="https://github.com/Shaniser/Canteen/blob/master/app/src/main/java/com/godelsoft/canteen/CanteenProvider.java">CanteenProvider</a> - Класс, предоставляющий информацию о столовой и меню</li>
+        </ul></li>
+    <li><a href="https://github.com/Shaniser/Canteen/tree/master/app/src/main/assets/menus">Данные столовых и меню</a></li>
+    <li><a href="https://github.com/Shaniser/Canteen/blob/master/dishes.txt">Список используемых блюд</a></li>
+</ul>
+
+## Структура хранения информации о столовых
+Вся информация об одной столовой содержится в одном текстовом файле, находящемся в папке <a href="https://github.com/Shaniser/Canteen/tree/master/app/src/main/assets/menus">/assets/menus</a>.<br>
+Названия всех таких файлов должны быть перечислены в <a href="https://github.com/Shaniser/Canteen/blob/master/app/src/main/assets/canteensList.txt">/assets/canteensList.txt</a> по одному файлу на строку.<br>
+В связи с тем, что вся информация хранится в текстовом виде, допускается быстрый переход на другие способы хранения и получения этой информации, в том числе - загрузка с сервера.
+<ul>
+    <li><a href="https://github.com/Shaniser/Canteen/blob/master/canteenExample.txt">Пример оформления файла с информацией о столовой с комментариями</a> (В рабочем файле комментарии не допускаются)</li>
+    <li><a href="https://github.com/Shaniser/Canteen/blob/master/dishes.txt">Пример оформления информации о блюдах</a></li>
+</ul>
 
 ## Текущая структура проекта
 ```java
@@ -30,7 +49,6 @@ class Basket {
 *Проект должен находится в папке `project`\
 *Используем camelCase, пишем в том же стиле, что уже начал Леша\
 *Исправить структуру пректа\
-*Распределить задачи\
 *Все вспомогательные файлы держать отдельно от `project` в соответствующей директории\
 *Наполнить dishes.txt едой
 
@@ -42,29 +60,28 @@ public enum FoodType {
     Hot, //Вторые блюда
     Garnish, //Гарниры
     Bakery, //Хлебобулочные изделия
-    Desert, //Пустыня
+    Desert, //Десерты (+Пустыня)
     Drink, //Напитки
 }
 
 public class TextListener {
     public TextView textView;
 
-    public TextListener(TextView textView, int listenId){
-        this.textView = textView;
-        ...
-    }
+    public TextListener(TextView textView, int listenId) //
 
-    public static void change(int listenId, String text){
-        //All listeners with "listenId" change textView.text to text
-    }
+    public static void change(int listenId, String text) //
 
-    public void setText(String text){
-        textView.setText(text);
-    }
+    public void setText(String text) //
 }
 
 public class TimeSpan {
-    ...
+    public TimeSpan(int openHour, int openMin, int closeHour, int closeMin) //
+
+    public static TimeSpan fromString(String str) //
+    
+    public boolean isInInterval(Calendar time) //
+    
+    public String toString() //
 }
 ```
 
