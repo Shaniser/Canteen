@@ -55,6 +55,7 @@
     <string name="no">Нет</string>
     <string name="not_working">Не работает</string>
     <string name="now_closed">Сейчас закрыто</string>
+    <string name="clear_basket">Очистить корзину</string>
 
 
 </resources>

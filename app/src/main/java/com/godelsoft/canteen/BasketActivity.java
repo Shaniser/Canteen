@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -34,6 +35,13 @@ public class BasketActivity extends AppCompatActivity {
         actionBar.setTitle(getResources().getString(R.string.basket));
 
         basketLinLay = findViewById(R.id.basketLinLay);
+
+        ((Button)findViewById(R.id.clearBasket)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Basket.clear();
+            }
+        });
 
         countDescription();
     }
