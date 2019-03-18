@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ public class AboutFood extends AppCompatActivity {
         TextListener countInBasket = new TextListener((TextView) findViewById(R.id.count), food.getId());
         countInBasket.set(Basket.getCount(food.getId()));
 
-        //TODO Установить соответствующую блюду картинку
+        ((ImageView)findViewById(R.id.icon)).setImageResource(Food.typeImages[food.getType()]);
 
         //Основное описание
         description = findViewById(R.id.description);
