@@ -3,8 +3,11 @@ package com.godelsoft.canteen;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Класс описывающий критерии сортировки и вывода меню на экран
+ */
 public class MenuFilter {
-    static ArrayList<Comparator<Food>> comparators = new ArrayList<Comparator<Food>>() {{
+    static ArrayList<Comparator<Food>> comparators = new ArrayList<Comparator<Food>>() {{ //Компораторы для сортировки карточек с едой
         add(new Comparator<Food>() {
             @Override
             public int compare(Food food, Food t1) {
@@ -61,19 +64,32 @@ public class MenuFilter {
         this.isGroups = comparator == 0;
     }
 
+    /**
+     * Изменение дня недели
+     * @param dayOfWeek
+     */
     public void setDayOfWeek(int dayOfWeek){
         this.dayOfWeek = dayOfWeek;
     }
 
+    /**
+     * Установка флажка "Вегитерианские"
+     * @param vegan
+     */
     public void setVegetarian(boolean vegan){
         this.isVegan = vegan;
     }
 
+    /**
+     * Установка компоратора по номеру
+     * @param comparator
+     */
     public void setComparator(int comparator){
         this.comparator = comparators.get(comparator);
         this.isGroups = comparator == 0;
     }
 
+    //Геттеры
     public Comparator<Food> getComparator(){
         return comparator;
     }

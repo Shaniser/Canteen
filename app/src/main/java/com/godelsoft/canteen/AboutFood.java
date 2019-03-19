@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+/**
+ * Класс страницы "О блюде"
+ */
 public class AboutFood extends AppCompatActivity {
     Food food;
     Button minus, plus;
@@ -21,23 +24,28 @@ public class AboutFood extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_food);
+
+        //Настройка шапки
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.about_food_title));
 
-        label = findViewById(R.id.label);
-
+        //Получение еды по id
         int id = getIntent().getExtras().getInt("id");
         food = Food.all.get(id);
 
+        //Вывод названия
+        label = findViewById(R.id.label);
         label.setText(food.getLabel());
 
+        //Получение кнопок и поля, отвечающего за количество еды этого вида в корзине
         minus = findViewById(R.id.minus);
         plus = findViewById(R.id.plus);
         TextListener countInBasket = new TextListener((TextView) findViewById(R.id.count), food.getId());
         countInBasket.set(Basket.getCount(food.getId()));
 
+        //Установка изображения в соответствии с видом блюда
         ((ImageView)findViewById(R.id.icon)).setImageResource(Food.typeImages[food.getType()]);
 
         //Основное описание
@@ -49,7 +57,7 @@ public class AboutFood extends AppCompatActivity {
         builder.append(String.format(" %s%s%s", food.getCost() / 100, (((food.getCost() % 100) == 0) ? "" : "." + (food.getCost() % 100)), getResources().getString(R.string.rub)));
         description.setText(builder);
 
-        //Белки, жиры и углеводы
+        //Белки, жиры и углеводы (вывод)
         TextView proteinsP = findViewById(R.id.proteinsP);
         ProgressBar progressBarProteins = findViewById(R.id.proteinsProgressBar);
         progressBarProteins.setProgress((int)(food.getProteins() * 100));
@@ -63,6 +71,7 @@ public class AboutFood extends AppCompatActivity {
         progressBarCarbohydrates.setProgress((int)(food.getCarbohydrates() * 100));
         carbohydratesP.setText(((double)(int)(food.getCarbohydrates() * 10000) / 100) + "%");
 
+        //Установка слушателя на общую стоимость
         TextListener totalCost = new TextListener((TextView) findViewById(R.id.totalCost), food.getId()){
             @Override
             public void set(int count){
@@ -70,9 +79,9 @@ public class AboutFood extends AppCompatActivity {
                 textView.setText((cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + getResources().getString(R.string.rub));
             }
         };
-
         totalCost.set(Basket.getCount(food.getId()));
 
+        //Установка слушателя на общую стоимость
         TextListener totalCalories = new TextListener((TextView) findViewById(R.id.totalCalories), food.getId()){
             @Override
             public void set(int count){
@@ -80,9 +89,9 @@ public class AboutFood extends AppCompatActivity {
                 textView.setText(String.format("%s%s", calories, getResources().getString(R.string.ccal)));
             }
         };
-
         totalCalories.set(Basket.getCount(food.getId()));
 
+        //Установка слушателей на кнопки + и -
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +106,7 @@ public class AboutFood extends AppCompatActivity {
             }
         });
 
+        //Вывод состава (если есть в БД)
         String composition = firstUpperCase(food.getDescription().trim());
         if(composition != null){
             findViewById(R.id.compLay).setVisibility(View.VISIBLE);
@@ -115,12 +125,22 @@ public class AboutFood extends AppCompatActivity {
         return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 
+    /**
+     * Настройка шапки
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    /**
+     * Обработка нажатия на элементы шапки
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
