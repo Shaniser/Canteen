@@ -57,6 +57,8 @@
     <string name="now_closed">Сейчас закрыто</string>
     <string name="clear_basket">Очистить корзину</string>
     <string name="composition">Состав</string>
+    <string name="share">Поделиться</string>
+    <string name="total_cost">Общая стоимость:</string>
 
 
 </resources>
