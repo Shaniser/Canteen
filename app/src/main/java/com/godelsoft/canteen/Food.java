@@ -43,6 +43,7 @@ public class Food {
         this.calories = calories;
         this.description = description;
 
+        //Добавляем блюдо в хеш таблицу для дальнейшего получения объекта Food по id
         all.put(id, this);
     }
 
@@ -113,7 +114,7 @@ public class Food {
 
     public static int getTypesCount() { return Food.typeNames.length; }
 
-    //Getters (Holy Sharp)
+    //Getters
     public int getId() { return id; }
     public int getType() { return type; }
     public String getLabel() { return label; }

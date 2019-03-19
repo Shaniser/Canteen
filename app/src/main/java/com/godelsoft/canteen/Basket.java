@@ -22,7 +22,7 @@ public final class Basket {
             idToCount.put(id, count);
         }
         TextListener.change(id, idToCount.get(id));
-        BasketActivity.countDescription();
+        BasketActivity.countDescription(BasketActivity.currentBasketActivity);
     }
 
     public static void add(Food food, int count){
@@ -42,7 +42,7 @@ public final class Basket {
         }else{
             TextListener.change(id, 0);
         }
-        BasketActivity.countDescription();
+        BasketActivity.countDescription(BasketActivity.currentBasketActivity);
     }
 
     public static void remove(Food food, int count){
@@ -67,7 +67,7 @@ public final class Basket {
             idToCount.put(id, 0);
             TextListener.change(id, 0);
         }
-        BasketActivity.countDescription();
+        BasketActivity.countDescription(BasketActivity.currentBasketActivity);
     }
 
     public static Set<Integer> getIdSet(){
