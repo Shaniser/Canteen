@@ -400,7 +400,7 @@
 
                         <Spinner
                             android:id="@+id/spinner"
-                            android:layout_width="344dp"
+                            android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"

@@ -2,6 +2,7 @@ package com.godelsoft.canteen;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -16,7 +17,8 @@ import java.util.Locale;
  */
 
 public class Food {
-    public static String[] TypeNames = { "Салаты", "Первые блюда", "Вторые блюда", "Гарниры", "Хлебобулочные изделия", "Десерты", "Напитки" };
+    public static String[] typeNames = { "Салаты", "Первые блюда", "Вторые блюда", "Гарниры", "Хлебобулочные изделия", "Десерты", "Напитки" };
+    public static int[] typeImages = { R.drawable.salad, R.drawable.first, R.drawable.second_hot, R.drawable.garnish, R.drawable.bread, R.drawable.desert, R.drawable.drink };
     public static SparseArray<Food> all = new SparseArray<>(); //Полный список еды <ID, Food>
 
     private String label, description;
@@ -56,12 +58,12 @@ public class Food {
         TextView mWeigth = view.findViewById(R.id.weigth);
         TextView mCost = view.findViewById(R.id.cost);
         TextView mCalories = view.findViewById(R.id.calories);
-        //TODO Установить соответствующую блюду картинку
+        mIcon.setImageResource(typeImages[type]);
 
         mLabel.setText(label);
         mWeigth.setText(String.format("%d%s", weight, context.getResources().getString(R.string.gram)));
         mCost.setText(String.format("%d%s%s", cost / 100, ((cost % 100) == 0) ? "" : "." + (cost % 100), context.getResources().getString(R.string.rub)));
-        mCalories.setText(String.format("%d%s", calories + context.getResources().getString(R.string.ccal)));
+        mCalories.setText(String.format("%d%s", calories, context.getResources().getString(R.string.ccal)));
 
         Button minus = view.findViewById(R.id.minus);
         Button plus = view.findViewById(R.id.plus);
@@ -106,10 +108,10 @@ public class Food {
     }
 
     public String getTypeName() {
-        return Food.TypeNames[this.type];
+        return Food.typeNames[this.type];
     }
 
-    public static int getTypesCount() { return Food.TypeNames.length; }
+    public static int getTypesCount() { return Food.typeNames.length; }
 
     //Getters (Holy Sharp)
     public int getId() { return id; }

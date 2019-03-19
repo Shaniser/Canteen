@@ -59,6 +59,17 @@ public final class Basket {
         return idToCount.get(id);
     }
 
+    /**
+     * Очистка корзины
+     */
+    public static void clear(){
+        for(int id : idToCount.keySet()){
+            idToCount.put(id, 0);
+            TextListener.change(id, 0);
+        }
+        BasketActivity.countDescription();
+    }
+
     public static Set<Integer> getIdSet(){
         return idToCount.keySet();
     }
