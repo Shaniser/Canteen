@@ -21,6 +21,9 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
+/**
+ * Класс страницы "О столовой"
+ */
 public class AboutCanteen extends AppCompatActivity {
     static String[] sortFilters;
     private MenuFilter filter = new MenuFilter((Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7, 0, false);
@@ -31,17 +34,20 @@ public class AboutCanteen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_canteen);
 
+        //Настройка шапки
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.about_canteen));
 
-
+        //Получаем столовую по id
         int id = getIntent().getExtras().getInt("id");
         final CanteenProvider canteen = CanteenProvider.all.get(id);
 
+        //Выводим название столовой
         ((TextView) findViewById(R.id.header)).setText(canteen.getName());
 
+        //Выводим открыта столовая или нет
         TextView isOpened = findViewById(R.id.isOpened);
         if(canteen.isWorking()){
             isOpened.setText(getResources().getString(R.string.now_opened));
@@ -50,6 +56,8 @@ public class AboutCanteen extends AppCompatActivity {
             isOpened.setText(getResources().getString(R.string.now_closed));
             isOpened.setTextColor(Color.parseColor("#e0554a"));
         }
+
+        //Формируем карточку с расписанием столовой
         TextView workingTime = findViewById(R.id.workingTime);
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("%s\n", canteen.getWorkingTime(0)));
@@ -74,15 +82,14 @@ public class AboutCanteen extends AppCompatActivity {
         }
         workingTime.setText(builder);
 
-
-
+        //Создаем выпадающий список фильтров
         sortFilters = new String[] { getResources().getString(R.string.group_sort), getResources().getString(R.string.alphabet_sort), getResources().getString(R.string.cost_sort) + "▲", getResources().getString(R.string.cost_sort) + "▼", getResources().getString(R.string.calories_sort) + "▲", getResources().getString(R.string.calories_sort) + "▼" };
-
         Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, sortFilters);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        //Получаем кнопки, отвечающие за рабочие дни столовой
         if(saturdayWorking != null){
             dayCards = new CardView[] {findViewById(R.id.dayCard), findViewById(R.id.dayCard1), findViewById(R.id.dayCard2), findViewById(R.id.dayCard3), findViewById(R.id.dayCard4), findViewById(R.id.dayCard5)};
         }else{
@@ -90,8 +97,10 @@ public class AboutCanteen extends AppCompatActivity {
             ((TableRow) findViewById(R.id.days)).removeView(findViewById(R.id.dayCard5));
         }
 
+        //Применияем фильтры
         applyFilters((LinearLayout) findViewById(R.id.menuLinLay), canteen, this);
 
+        //Устанавливаем слушатель на выпадающий список
         final Context context = this;
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -101,11 +110,11 @@ public class AboutCanteen extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
 
+        //Устанавливаем слушатель на чекбокс вегитерианской еды
         ((CheckBox) findViewById(R.id.isVegetarian)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -115,9 +124,17 @@ public class AboutCanteen extends AppCompatActivity {
         });
     }
 
+    /**
+     * Применение фильтров и изменение их отображения
+     * @param linearLayout
+     * @param canteenProvider
+     * @param context
+     */
     public void applyFilters(final LinearLayout linearLayout, final CanteenProvider canteenProvider, final Context context){
+        //Текущий день недели (с 0)
         int currentDay = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
 
+        //Установка слушателей и настройка внешнего вида карточек-фильтров-по-дням-недели
         if(canteenProvider.getFoodList(filter.getDayOfWeek()) != null) {
             for (int i = 0; i < dayCards.length; i++) {
                 if (filter.getDayOfWeek() == i) {
@@ -179,12 +196,22 @@ public class AboutCanteen extends AppCompatActivity {
         }
     }
 
+    /**
+     * Настройка шапки
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    /**
+     * Обработка нажатия на элементы шапки
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
