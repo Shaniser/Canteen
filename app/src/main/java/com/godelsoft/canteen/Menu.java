@@ -63,7 +63,7 @@ public class Menu {
 
                     if(!vegetarianOnly || containsVegetarian){
                         View header = LayoutInflater.from(context).inflate(R.layout.header, null);
-                        TextView h = header.findViewById(R.id.header);
+                        TextView h = header.findViewById(R.id.compHeader);
                         h.setText(Food.typeNames[i]);
                         ll.addView(header);
                     }
