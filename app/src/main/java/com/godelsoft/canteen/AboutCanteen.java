@@ -23,7 +23,7 @@ import java.util.Calendar;
 
 public class AboutCanteen extends AppCompatActivity {
     static String[] sortFilters;
-    static MenuFilter filter = new MenuFilter((Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7, 0, false);
+    private MenuFilter filter = new MenuFilter((Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7, 0, false);
     static CardView[] dayCards;
 
     @Override
