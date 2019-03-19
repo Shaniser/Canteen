@@ -21,7 +21,6 @@ public class CanteenProvider {
     private String name;
     private TimeSpan workTimeDef, breakTimeDef, workTimeSat, breakTimeSat; //Воскресение - выходной
     private Menu[] menus;
-    private ArrayList<Food> allDishes;
 
     /**
      * Создание нового объекта
@@ -39,11 +38,11 @@ public class CanteenProvider {
             this.breakTimeSat = TimeSpan.fromString(arr[6]);
 
             int ind = 8;
-            allDishes = new ArrayList<>();
+            SparseArray<Food> allDishes = new SparseArray<>();
             while (!arr[ind].equals("END_DISHES")) {
                 String[] tarr = arr[ind].split(":");
                 int indexOfEndOfDishName = arr[ind].indexOf(':', arr[ind].indexOf(':', arr[ind].indexOf(':') + 1) + 1);
-                allDishes.add(new Food(
+                allDishes.put(Integer.parseInt(tarr[0]), new Food(
                         Integer.parseInt(tarr[0]), Integer.parseInt(tarr[1]), tarr[2], Integer.parseInt(tarr[3]),
                         Double.parseDouble(tarr[4]), Double.parseDouble(tarr[5]), Double.parseDouble(tarr[6]),
                         Integer.parseInt(tarr[7]), tarr[8].equals("+"), Integer.parseInt(tarr[9]),
