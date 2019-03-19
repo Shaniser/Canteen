@@ -88,15 +88,15 @@ public class BasketActivity extends AppCompatActivity {
         TextView proteinsP = currentBasketActivity.findViewById(R.id.proteinsP);
         ProgressBar progressBarProteins = currentBasketActivity.findViewById(R.id.proteinsProgressBar);
         progressBarProteins.setProgress((int)(prot * 100));
-        proteinsP.setText(String.format(Locale.US, "%.2f%%", prot));
+        proteinsP.setText(String.format(Locale.US, "%.2f%%", prot * 100));
         TextView fatsP = currentBasketActivity.findViewById(R.id.fatsP);
         ProgressBar progressBarFats = currentBasketActivity.findViewById(R.id.fatsProgressBar);
         progressBarFats.setProgress((int)(fats * 100));
-        fatsP.setText(String.format(Locale.US, "%.2f%%", fats));
+        fatsP.setText(String.format(Locale.US, "%.2f%%", fats * 100));
         TextView carbohydratesP = currentBasketActivity.findViewById(R.id.carbohydratesP);
         ProgressBar progressBarCarbohydrates = currentBasketActivity.findViewById(R.id.carbohydratesProgressBar);
         progressBarCarbohydrates.setProgress((int)(carb * 100));
-        carbohydratesP.setText(String.format(Locale.US, "%.2f%%", carb));
+        carbohydratesP.setText(String.format(Locale.US, "%.2f%%", carb * 100));
 
         //Вывод содержимого корзины
         currentBasketActivity.basketMenu.toScreen(currentBasketActivity.basketLinLay, currentBasketActivity, new Comparator<Food>() {
