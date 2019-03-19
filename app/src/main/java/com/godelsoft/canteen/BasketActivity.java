@@ -1,8 +1,5 @@
 package com.godelsoft.canteen;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.Comparator;
@@ -51,10 +47,8 @@ public class BasketActivity extends AppCompatActivity {
         if(currentBasketActivity == null) return;
         currentBasketActivity.basketMenu = new Menu();
 
-        /**
-         * Подсчёт суммы
-         */
-        int count = 0, weight = 0, calories = 0, cost = 0;//, gramFats = 0, gramCarbo = 0, gramProt = 0;
+        //Подсчёт суммы
+        int count = 0, weight = 0, calories = 0, cost = 0;
         double gramFats = 0, gramCarbo = 0, gramProt = 0;
         Set<Integer> foodSet = Basket.getIdSet();
 
@@ -80,40 +74,31 @@ public class BasketActivity extends AppCompatActivity {
             currentBasketActivity.findViewById(R.id.emptyBasket).setVisibility(View.GONE);
         }
 
-        /**
-         * Формирование описания
-         */
+        //Формирование описания
         currentBasketActivity.description = currentBasketActivity.findViewById(R.id.description);
         StringBuilder builder = new StringBuilder();
-        builder.append(" " + count + "\n");
-        builder.append(" " + weight + currentBasketActivity.getResources().getString(R.string.gram) + "\n");
-        builder.append(" " + calories + currentBasketActivity.getResources().getString(R.string.ccal) + "\n");
-        builder.append(" " + (cost / 100) + (((cost % 100) == 0) ? "" : "." + (cost % 100)) + currentBasketActivity.getResources().getString(R.string.rub));
+        builder.append(String.format(" %d\n", count));
+        builder.append(String.format(" %d%s\n", weight, currentBasketActivity.getResources().getString(R.string.gram)));
+        builder.append(String.format(" %d%s\n", calories, currentBasketActivity.getResources().getString(R.string.ccal)));
+        builder.append(String.format(" %d%s%s", cost / 100, ((cost % 100) == 0) ? "" : "." + (cost % 100), currentBasketActivity.getResources().getString(R.string.rub)));
         currentBasketActivity.description.setText(builder);
 
-        /**
-         * Белки, жиры и углеводы
-         */
+        //Белки, жиры и углеводы
         double prot = gramProt / (gramCarbo + gramFats + gramProt), fats = gramFats / (gramCarbo + gramFats + gramProt), carb = gramCarbo / (gramCarbo + gramFats + gramProt);
         TextView proteinsP = currentBasketActivity.findViewById(R.id.proteinsP);
         ProgressBar progressBarProteins = currentBasketActivity.findViewById(R.id.proteinsProgressBar);
         progressBarProteins.setProgress((int)(prot * 100));
-//        proteinsP.setText(((double)(int)(prot * 10000) / 100) + "%");
         proteinsP.setText(String.format(Locale.US, "%.2f%%", prot));
         TextView fatsP = currentBasketActivity.findViewById(R.id.fatsP);
         ProgressBar progressBarFats = currentBasketActivity.findViewById(R.id.fatsProgressBar);
         progressBarFats.setProgress((int)(fats * 100));
-//        fatsP.setText(((double)(int)(fats * 10000) / 100) + "%");
         fatsP.setText(String.format(Locale.US, "%.2f%%", fats));
         TextView carbohydratesP = currentBasketActivity.findViewById(R.id.carbohydratesP);
         ProgressBar progressBarCarbohydrates = currentBasketActivity.findViewById(R.id.carbohydratesProgressBar);
         progressBarCarbohydrates.setProgress((int)(carb * 100));
-//        carbohydratesP.setText(((double)(int)(carb * 10000) / 100) + "%");
         carbohydratesP.setText(String.format(Locale.US, "%.2f%%", carb));
 
-        /**
-         * Вывод содержимого корзины
-         */
+        //Вывод содержимого корзины
         currentBasketActivity.basketMenu.toScreen(currentBasketActivity.basketLinLay, currentBasketActivity, new Comparator<Food>() {
             @Override
             public int compare(Food food, Food t1) {
@@ -131,26 +116,5 @@ public class BasketActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    /**
-     * Класс для суммирования последовательностей чисел с плавающей точкой по алгоритму Кэхэна
-     */
-    class KahanSum {
-        private double sum, c;
-
-        public KahanSum() {
-            this.sum = 0.f;
-            this.c = 0.f;
-        }
-
-        public void add(double val) {
-            double y = val - c;
-            double t = this.sum + y;
-            c = (t - sum) - y;
-            sum = t;
-        }
-
-        public double getSum() { return this.sum; }
     }
 }
