@@ -96,6 +96,23 @@ public class AboutFood extends AppCompatActivity {
                 Basket.add(food, 1);
             }
         });
+
+        String composition = firstUpperCase(food.getDescription().trim());
+        if(composition != null){
+            findViewById(R.id.compLay).setVisibility(View.VISIBLE);
+            ((TextView)findViewById(R.id.composition)).setText(composition);
+        }
+
+    }
+
+    /**
+     * Делает первую букву заглавной
+     * @param word
+     * @return
+     */
+    public String firstUpperCase(String word){
+        if(word == null || word.isEmpty()) return null;
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 
     @Override
