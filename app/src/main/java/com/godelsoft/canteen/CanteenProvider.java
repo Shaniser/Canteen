@@ -42,11 +42,12 @@ public class CanteenProvider {
             allDishes = new ArrayList<>();
             while (!arr[ind].equals("END_DISHES")) {
                 String[] tarr = arr[ind].split(":");
+                int indexOfEndOfDishName = arr[ind].indexOf(':', arr[ind].indexOf(':', arr[ind].indexOf(':') + 1) + 1);
                 allDishes.add(new Food(
                         Integer.parseInt(tarr[0]), Integer.parseInt(tarr[1]), tarr[2], Integer.parseInt(tarr[3]),
                         Double.parseDouble(tarr[4]), Double.parseDouble(tarr[5]), Double.parseDouble(tarr[6]),
                         Integer.parseInt(tarr[7]), tarr[8].equals("+"), Integer.parseInt(tarr[9]),
-                        arr[ind].substring(arr[ind].indexOf("\"") + 1, arr[ind].length() - 1)));
+                        arr[ind].substring(arr[ind].indexOf("\"", indexOfEndOfDishName) + 1, arr[ind].length() - 1)));
                 ind++;
             }
 
