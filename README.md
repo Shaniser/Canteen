@@ -16,7 +16,7 @@
 >Полное лицензионное соглашение можно прочитать <a href="https://github.com/Shaniser/Canteen/tree/master/license agreement(RUS)">здесь.</a>
 
 ## Установка
-1. Скачайте .apk файл данного приложения <a href="https://github.com/Shaniser/Canteen/blob/master/builds/canteen%201.3.apk">здесь</a>
+1. Скачайте .apk файл данного приложения <a href="https://github.com/Shaniser/Canteen/blob/master/builds/canteen%201.4.apk">здесь</a>
 2. Следуйте дальнейшим инструкциям при установке
 
 ### Команда разработчиков
