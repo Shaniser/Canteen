@@ -2,10 +2,12 @@ package com.godelsoft.canteen;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -66,8 +68,8 @@ public class Food {
         mCost.setText(String.format("%d%s%s", cost / 100, ((cost % 100) == 0) ? "" : "." + (cost % 100), context.getResources().getString(R.string.rub)));
         mCalories.setText(String.format("%d%s", calories, context.getResources().getString(R.string.ccal)));
 
-        Button minus = view.findViewById(R.id.minus);
-        Button plus = view.findViewById(R.id.plus);
+        final Button minus = view.findViewById(R.id.minus);
+        final Button plus = view.findViewById(R.id.plus);
         TextListener countInBasket = new TextListener((TextView) view.findViewById(R.id.count), id);
         countInBasket.set(Basket.getCount(id));
 
@@ -93,6 +95,33 @@ public class Food {
                 context.startActivity(intent);
             }
         });
+
+        //Увеличение радиуса обработки касания для кнопок + и - для лучшего отклика
+        final View parent = (View) minus.getParent();
+        final TouchDelegateComposite touchDelegateComposite = new TouchDelegateComposite(parent);
+        parent.post( new Runnable() {
+            public void run() {
+                final Rect rect = new Rect();
+                minus.getHitRect(rect);
+                rect.top -= 30;
+                rect.left -= 30;
+                rect.bottom += 30;
+                rect.right += 30;
+                touchDelegateComposite.addDelegate(new TouchDelegate(rect, minus));
+            }
+        });
+        parent.post( new Runnable() {
+            public void run() {
+                final Rect rect = new Rect();
+                plus.getHitRect(rect);
+                rect.top -= 30;
+                rect.left -= 30;
+                rect.bottom += 30;
+                rect.right += 30;
+                touchDelegateComposite.addDelegate(new TouchDelegate(rect, plus));
+            }
+        });
+        parent.setTouchDelegate(touchDelegateComposite);
 
         return view;
     }

@@ -60,6 +60,7 @@
     <string name="share">Поделиться</string>
     <string name="total_cost">Общая стоимость:</string>
     <string name="unit">шт.</string>
+    <string name="background">background</string>
 
 
 </resources>
